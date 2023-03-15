@@ -17,7 +17,7 @@ const Navbar = () => {
     <>
       <div className='navbar_affix' offset-top={window.innerHeight / 2 - 150}>
         <div className="mutant_navbar">
-         <ToolLayout />
+         {/* <ToolLayout /> */}
           <span className="label" onClick={setOnClick}>
             设置 <i className="sp-icon sp-icon-shezhi1"></i>
           </span>

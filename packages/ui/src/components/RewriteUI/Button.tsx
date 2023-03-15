@@ -11,6 +11,7 @@ interface ISpButtonProps {
   size?: "middle" | "small" | "mini";
   type?: "default" | "primary" | "dashed" | "text" | "link" | "danger";
   children?:any
+  onClick?:(e: Event) => void
 }
 
 const SpButton = (props: ISpButtonProps) => {

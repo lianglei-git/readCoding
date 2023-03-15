@@ -189,7 +189,7 @@ class BookEntry {
     }
 
     /** 当前选中书籍 */
-    activeBook = null;
+    activeBook:BookItem|null = null;
 
     /** book的行动 */
     BookAction = new BookAction();
@@ -211,7 +211,8 @@ class BookEntry {
     toLoadDataFormat(historyBooks: any[]){
         historyBooks.map((item: CoreBookType) => {
             item.isHistoryInfo = true;
-            this._bookMapPush(item);
+            let b = this._bookMapPush(item);
+            b.key = item.key
         })
     }
 
