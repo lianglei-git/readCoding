@@ -13,22 +13,25 @@
     align-items: center;
     // transform: translateX(-50px);
     justify-content: center;
-    transition: all .3s;
+    transition: all .15s;
     &:hover {
     transform: translateX(0px);
     }
     >.label{
         display: flex;
         align-items: center;
+        &:hover {
+            color: rgb(65, 119, 4);
+            cursor: pointer;
+        }
     }
     .sp-icon {
         font-size: 25px;
-        transition: transform .3s, color .2s;
+        transition: transform .2s, color .2s;
         display: inline-block;
         width: 22px;
         margin: 5px;
         &:hover {
-            color: rgb(65, 119, 4);
             transform: scale(1.4)
         }
     }

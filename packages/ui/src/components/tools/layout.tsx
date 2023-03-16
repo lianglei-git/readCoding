@@ -36,10 +36,10 @@ const ToolLayout = () => {
   return (
     <sp-popover
       placement="right"
-      title="修改布局"
+      // title="修改布局"
       content={`
-            <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Horizontal})">水平布局</sp-button2>
-            <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Mutant})">其他布局</sp-button2>
+            <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Horizontal})">Horizontal</sp-button2>
+            <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Mutant})">Mutant</sp-button2>
             `}
       get-popup-container=".mutant_navbar"
     >
