@@ -4,4 +4,4 @@
 1. **localforage** -- Web for indexeddb.
 2. **mobx**
 3. **react**
-3. **react-dropzone** -- drop file
+4. **react-dropzone** -- drop file

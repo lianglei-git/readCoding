@@ -13,11 +13,17 @@ const Navbar = () => {
   const setOnClick = (e) => {
     setSettingVisible(true);
   };
+  const onWebContainer = () => {
+    window.open('http://localhost:5269')
+  }
   return (
     <>
       <div className='navbar_affix' offset-top={window.innerHeight / 2 - 150}>
         <div className="mutant_navbar">
          {/* <ToolLayout /> */}
+         <span className="label" onClick={onWebContainer}>
+          Web <i className="sp-icon sp-icon-guanlian"></i>
+         </span>
           <span className="label" onClick={setOnClick}>
             设置 <i className="sp-icon sp-icon-shezhi1"></i>
           </span>

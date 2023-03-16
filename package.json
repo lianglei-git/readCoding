@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "pnpm --filter webContainerApp_demo start & pnpm --filter ui start",
     "babel": "babel",
     "element": "node sparrowendui/test.js"
   },

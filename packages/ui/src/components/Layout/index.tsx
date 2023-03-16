@@ -3,40 +3,66 @@ import React from "react";
 import GridLayout, { WidthProvider, Responsive } from "react-grid-layout";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const ReactGridLayout = WidthProvider(GridLayout);
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
-import './index.less'
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+import "./index.less";
 import { observer } from "mobx-react-lite";
 // 1. https://boychina.github.io/posts/2020-09-27-react-grid-layout
 // 2. https://blog.csdn.net/wang19970228/article/details/123514152
 const Layout = () => {
+  const SettingStore = useSettingStore();
+  const layout = SettingStore.LayoutPlan;
 
-    const SettingStore = useSettingStore();
-    const layout = SettingStore.LayoutPlan;
+  const onLayoutChange = (layout: any) => {
+    console.log(layout, "layout");
+  };
+  const onDragStart = (a, b, c, d, e: DragEvent) => {
+    e.stopPropagation();
+  };
 
-      const onLayoutChange = (layout) => {
-        console.log(layout,'layout')
-      }
-      const onDragStart = (a,b,c,d,e:DragEvent) => {
-        e.stopPropagation();
-      }
-      const content =  layout.map(item => {
-        return <div key={item.i}>{
-            item.children? <ReactGridLayout onDragStart={onDragStart} cols={6} layout={item.children}>{item.children.map(i2 => <div key={i2.i}>
-                <i2.component />
-            </div>)}</ReactGridLayout> :<item.component />
-        }</div>
-    })
-    return <ReactGridLayout
-    className="layout"
-    compactType={'horizontal'}
-    // style={{height: window.innerHeight}}
-    layout={layout}
-    cols={6}
-    // rowHeight={210}
-    autoSize
-    onLayoutChange={onLayoutChange}
-    >{content}</ReactGridLayout>
-}
+  const onClose = (item: any, idx: number) => {
+    item.show = false;
+  }
+  const content = layout.map((item: any, index: number) => {
+    return (
+      item.show && <div key={item.i} className="wh100">
+        <i className="sp-icon sp-icon-close" onClick={e => onClose(item, index)}></i>
+        {item.children ? (
+          <ReactGridLayout
+            onDragStart={onDragStart}
+            cols={6}
+            layout={item.children}
+          >
+            {item.children.map((i2: any, i2Index:number) => (
+              i2.show&& <div key={i2.i} className="wh100">
+                <div>
+                  <i className="sp-icon sp-icon-close" onClick={e => onClose(i2, i2Index)}></i> <i2.component />{" "}
+                </div>
+              </div>
+            ))}
+          </ReactGridLayout>
+        ) : (
+           <div key={item.i} className="wh100">
+            <item.component />
+          </div>
+        )}
+      </div>
+    );
+  });
+  return (
+    <ReactGridLayout
+      className="layout"
+      compactType={"horizontal"}
+      // style={{height: window.innerHeight}}
+      layout={layout}
+      cols={6}
+      // rowHeight={210}
+      autoSize
+      onLayoutChange={onLayoutChange}
+    >
+      {content}
+    </ReactGridLayout>
+  );
+};
 
 export default observer(Layout);
