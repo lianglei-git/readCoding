@@ -22,13 +22,13 @@ const planLayoutMain_Mutant: LayoutEnmu.Mutant | any = [
 
 
 const codePlan2 = [
-    { i: 'css', x: 0, y: 0, w: 6, h: 2, component: CodingContainer.CssContainer, show: false },
-    { i: 'js', x: 0, y: 2, w: 6, h: 2, component: CodingContainer.JsContainer, show: false },
+    { i: 'css', x: 0, y: 0, w: 6, h: 2, component: CodingContainer.CssContainer, show: true },
+    { i: 'js', x: 0, y: 2, w: 6, h: 2, component: CodingContainer.JsContainer, show: true },
     { i: 'html', x: 0, y: 4, h: 2, component: CodingContainer.HtmlContainer, show: true },
 ]
 
 const planLayoutMain_Horizontal: LayoutEnmu.Horizontal | any = [
-    { i: 'read', x: 2, y: 0, w: 2, h: 6, component: ReadBookContainer, show: false },
+    { i: 'read', x: 2, y: 0, w: 2, h: 6, component: ReadBookContainer, show: true },
     { i: 'view', x: 4, y: 0, w: 2, h: 6, component: ViewRenderContainer, show: true },
     { i: 'code', x: 6, y: 0, w: 2, h: 6, children: codePlan2, show: true }
 ]

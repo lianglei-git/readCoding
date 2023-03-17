@@ -1,4 +1,7 @@
 import CodeEditor from "@/components/CodeEditor"
+import { useAppStore } from "@/hooks"
+import { reaction } from "mobx"
+import { observer } from "mobx-react-lite"
 
 
 /** write code */
@@ -35,8 +38,14 @@ const tmpl_HTML = `
 </body>
 </html>
 `;
-CodingContainer.HtmlContainer = () => {
-    return <div> <CodeEditor value={tmpl_HTML} language="html" /></div>
-}
+CodingContainer.HtmlContainer = observer(() => {
+    const app = useAppStore();
+    const onMount = (instance) => {
+        reaction(() => app.Coding.CurPanelCode, e => {
+            instance.setValue(e);
+        })
+    }
+    return <div> <CodeEditor value={app.Coding.CurPanelCode} language="html" onMount={onMount}/></div>
+})
 
 export default CodingContainer;

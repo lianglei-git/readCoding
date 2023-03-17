@@ -7,6 +7,7 @@ import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
 import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker";
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
+import { reaction } from "mobx";
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
@@ -45,6 +46,9 @@ const CodeEditor = (props: ICodeEditorType) => {
         },
       }
     );
+
+    props.onMount?.(instance);
+    
     instance.onDidChangeModelContent(() => {
       // 获取到当前编辑内容
       console.log(instance.getValue());

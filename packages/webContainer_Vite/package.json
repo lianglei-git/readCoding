@@ -1,0 +1,18 @@
+{
+  "name": "webContainer_Vite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "vite --port 2222"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@webcontainer/api": "^1.0.2",
+    "vite": "^4.1.4",
+    "xterm": "^5.1.0"
+  }
+}

@@ -1,12 +1,25 @@
-import { files } from './files';
 import './main.css';
 import { WebContainer } from '@webcontainer/api';
 import { Terminal } from 'xterm'
 import 'xterm/css/xterm.css';
 
+const Files = process.env.webContainerFiles;
+// console.log(Files,'Files')
+
+// const tab = [] 
+
+// for(let k in Files) {
+//     if(Files['directory']){
+
+//     }
+// }
+
+
+
+
 // read: https://zhuanlan.zhihu.com/p/446329929
-(document.querySelector('#app') as any).innerHTML = `
-<p>You can see WebContainer 🎉</p>
+(document.querySelector('#root') as any).innerHTML = `
+<p>You can see WebContainer For Vite 🎉</p>
 <div class="container">
 <div class="editor">
   <textarea>I am a textarea</textarea>
@@ -15,8 +28,9 @@ import 'xterm/css/xterm.css';
   <span class='loadel'>
   请 iTerm 输入:
   <pre>
-    1. pnpm install
-    2. pnpm start
+    1. cd react_tmpl
+    2. pnpm install
+    3. pnpm dev
   </pre>
   </span>
   <iframe src="loading.html"></iframe>
@@ -34,14 +48,15 @@ const textareaEl: any = document.querySelector('textarea');
 const terminalEl: any = document.querySelector('.terminal');
 
 async function writeIndexJS(content: string) {
-    await webcontainerInstance.fs.writeFile('/index.js', content);
+    await webcontainerInstance.fs.writeFile('./react_tmpl/src/App.tsx', content);
 };
 /** @type {import('@webcontainer/api').WebContainer}  */
 let webcontainerInstance: any;
 
 window.addEventListener('load', async () => {
     iframeEl.style.opacity = 0;
-    textareaEl.value = files['index.js'].file.contents;
+    const value = Files.react_tmpl.directory.src.directory['App.tsx'].file.contents
+    textareaEl.value = value //Files['index.js'].file.contents;
     textareaEl.addEventListener('input', (e) => {
         console.log(e.currentTarget.value)
         writeIndexJS(e.currentTarget.value);
@@ -53,19 +68,12 @@ window.addEventListener('load', async () => {
     terminal.open(terminalEl);
     // Call only once
     webcontainerInstance = await WebContainer.boot();
-    await webcontainerInstance.mount(files);
-    const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
+    await webcontainerInstance.mount(Files);
+    const packageJSON = await webcontainerInstance.fs.readFile('./react_tmpl/package.json', 'utf-8');
     console.log(packageJSON);
-    
-
-    // const exitCode = await installDependencies(terminal);
-    // if (exitCode !== 0) {
-    //     throw new Error('Installation failed');
-    // };
-    // startDevServer(terminal);
     webcontainerInstance.on('server-ready', (port: any, url: any) => {
         iframeEl.src = url;
-        loadEl.style.display = 0;
+        loadEl.style.display = 'none';
         iframeEl.style.opacity = 1;
     });
     startShell(terminal);

@@ -2,11 +2,21 @@ import { defineConfig } from 'vite'
 import babel from 'vite-plugin-babel';
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import {transform_webcontainerFiles} from './private/transforms.node'
 function _resolve(dir: string) {
   return path.resolve(__dirname, dir)
 }
+
+const template = transform_webcontainerFiles(_resolve('./template'));
 export default defineConfig({
   base: './',
+  server: {
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Resource-Policy' :'same-origin' 
+    }
+  },
   plugins: [
     react({
       babel: {
@@ -49,6 +59,8 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {}
+    'process.env': {
+      template 
+    }
   }
 })
