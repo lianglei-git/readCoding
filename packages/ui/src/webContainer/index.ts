@@ -11,8 +11,8 @@ import 'xterm/css/xterm.css';
 
 
 
-async function writeIndexJS(content: string) {
-    await webcontainerInstance.fs.writeFile('./react_tmpl/src/App.tsx', content);
+export async function writeIndexJS(path:string, content: string) {
+    await webcontainerInstance.fs.writeFile(path, content);
 };
 
 /** @type {import('@webcontainer/api').WebContainer}  */

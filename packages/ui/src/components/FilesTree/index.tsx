@@ -23,7 +23,8 @@ import TreeFiles from './tree';
 const FilesTree = () => {
     const app =useAppStore();
     const onSelect = (k, info) => {
-        console.log(info.node.path)
+        // console.log(info.node.path)
+        app.Coding.setCurPath(info.node.path)
         app.Coding.setCurPanelCode(info.node.content)
     }
     return <TreeFiles treeData={app.TreeData} onSelect={onSelect} />

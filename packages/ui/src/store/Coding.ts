@@ -7,9 +7,13 @@ class CodingStore {
     }
 
     CurPanelCode = '';
+    CurPath = '';
     
     setCurPanelCode(value:string) {
         this.CurPanelCode = value;
+    }
+    setCurPath(path: string) {
+        this.CurPath = path;
     }
 }
 

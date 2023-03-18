@@ -42,7 +42,7 @@ const Layout = () => {
             ))}
           </ReactGridLayout>
         ) : (
-           <div key={item.i} className="wh100">
+           <div key={item.i} >
             <item.component />
           </div>
         )}

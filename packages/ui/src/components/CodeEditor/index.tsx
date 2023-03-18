@@ -51,7 +51,8 @@ const CodeEditor = (props: ICodeEditorType) => {
     
     instance.onDidChangeModelContent(() => {
       // 获取到当前编辑内容
-      console.log(instance.getValue());
+    props.onChangeValue?.(instance.getValue());
+
     });
   }, []);
   return <div ref={codeContainer} className="CodeEditor"></div>;

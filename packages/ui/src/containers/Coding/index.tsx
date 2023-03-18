@@ -1,5 +1,6 @@
 import CodeEditor from "@/components/CodeEditor"
 import { useAppStore } from "@/hooks"
+import { writeIndexJS } from "@/webContainer"
 import { reaction } from "mobx"
 import { observer } from "mobx-react-lite"
 
@@ -45,7 +46,10 @@ CodingContainer.HtmlContainer = observer(() => {
             instance.setValue(e);
         })
     }
-    return <div> <CodeEditor value={app.Coding.CurPanelCode} language="html" onMount={onMount}/></div>
+    const onChangeValue = (value) => {
+        writeIndexJS(app.Coding.CurPath,value)
+    }
+    return <div> <CodeEditor value={app.Coding.CurPanelCode} language="html" onMount={onMount} onChangeValue={onChangeValue}/></div>
 })
 
 export default CodingContainer;
