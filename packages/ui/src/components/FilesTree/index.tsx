@@ -3,7 +3,7 @@ import TreeExample from './demo2';
 import Tree from 'rc-tree';
 import { useAppStore } from '@/hooks';
 import TreeFiles from './tree';
-
+import './index.less'
 
 
 // {
@@ -27,7 +27,7 @@ const FilesTree = () => {
         app.Coding.setCurPath(info.node.path)
         app.Coding.setCurPanelCode(info.node.content)
     }
-    return <TreeFiles treeData={app.TreeData} onSelect={onSelect} />
+    return  <TreeFiles treeData={app.TreeData} onSelect={onSelect} />
 }
 
 export default FilesTree;

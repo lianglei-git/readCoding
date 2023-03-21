@@ -16,7 +16,7 @@ const codePlan1 = [
 const planLayoutMain_Mutant: LayoutEnmu.Mutant | any = [
     { i: 'view', x: 3, y: 0, w: 3, h: 3, component: ViewRenderContainer, show: true },
     { i: 'read', x: 0, y: 0, w: 3, h: 3, component: ReadBookContainer, show: true },
-    { i: 'code', x: 6, y: 3, w: 6, h: 3, children: codePlan1, show: true }
+    { i: 'code', x: 6, y: 3, w: 6, h: 3, children: codePlan1, show: true, component: CodingContainer }
 ]
 
 
@@ -30,7 +30,7 @@ const codePlan2 = [
 const planLayoutMain_Horizontal: LayoutEnmu.Horizontal | any = [
     { i: 'read', x: 2, y: 0, w: 2, h: 6, component: ReadBookContainer, show: true },
     { i: 'view', x: 4, y: 0, w: 2, h: 6, component: ViewRenderContainer, show: true },
-    { i: 'code', x: 6, y: 0, w: 2, h: 6, children: codePlan2, show: true }
+    { i: 'code', x: 6, y: 0, w: 2, h: 6, children: codePlan2, show: true, component: CodingContainer }
 ]
 
 

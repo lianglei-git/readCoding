@@ -22,31 +22,44 @@ const Layout = () => {
 
   const onClose = (item: any, idx: number) => {
     item.show = false;
-  }
+  };
   const content = layout.map((item: any, index: number) => {
     return (
-      item.show && <div key={item.i} className="wh100">
-        <i className="sp-icon sp-icon-close" onClick={e => onClose(item, index)}></i>
-        {item.children ? (
-          <ReactGridLayout
-            onDragStart={onDragStart}
-            cols={6}
-            layout={item.children}
-          >
-            {item.children.map((i2: any, i2Index:number) => (
-              i2.show&& <div key={i2.i} className="wh100">
-                <div>
-                  <i className="sp-icon sp-icon-close" onClick={e => onClose(i2, i2Index)}></i> <i2.component />{" "}
-                </div>
-              </div>
-            ))}
-          </ReactGridLayout>
-        ) : (
-           <div key={item.i} >
-            <item.component />
-          </div>
-        )}
-      </div>
+      item.show && (
+        <div key={item.i} className="wh100">
+          <i
+            className="sp-icon sp-icon-close"
+            onClick={(e) => onClose(item, index)}
+          ></i>
+         <div key={item.i}>
+              <item.component />
+              {item.children && (
+            <ReactGridLayout
+              onDragStart={onDragStart}
+              cols={6}
+              layout={item.children}
+            >
+              
+              {item.children.map(
+                (i2: any, i2Index: number) =>
+                  i2.show && (
+                    <div key={i2.i} className="wh100">
+                      <div>
+                        <i
+                          className="sp-icon sp-icon-close"
+                          onClick={(e) => onClose(i2, i2Index)}
+                        ></i>{" "}
+                        <i2.component />{" "}
+                      </div>
+                    </div>
+                  )
+              )}
+            </ReactGridLayout>
+          )}
+            </div>
+         
+        </div>
+      )
     );
   });
   return (

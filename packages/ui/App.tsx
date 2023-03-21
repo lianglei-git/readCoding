@@ -5,7 +5,6 @@ import UploadFile from "@/components/UploadFile";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import './App.less'
-import FilesTree from "@/components/FilesTree";
 import './src/webContainer'
 import './public/reset.css'
 
@@ -18,7 +17,6 @@ const App = () => {
         {/* <CodeEditor /> */}
         {/* <UploadFile /> */}
         <Layout />
-        <FilesTree />
       </div>
     </AppStoreContext.Provider>
   );

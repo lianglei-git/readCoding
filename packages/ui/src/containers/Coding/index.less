@@ -1,0 +1,37 @@
+.CodingContainer {
+    // width: auto !important;
+    // height: auto !important;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    // overflow: hidden;
+    .treeContainer {
+        position: absolute;
+        left: 0%;
+        // display: none;
+        transition: left .3s;
+        width: 50%;
+        height: 100%;
+        overflow: auto;
+        color: #cccccc;
+        background-color: hsl(220 10% 14%);
+        // z-index: 9;
+        &.active {
+            left: -50%;
+            // display: block;
+        }
+      
+    }
+}
+.react-grid-layout {
+    background-color: #fff;
+}
+
+.folderButton {
+    padding: 0 !important;
+    top: -21px;
+    left: 30px;
+    .sp-icon {
+        font-size: 22px;
+    }
+}

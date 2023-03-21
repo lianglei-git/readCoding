@@ -30,15 +30,14 @@ const TreeFiles = (props) =>{
     
 
 
-    return <div style={{marginLeft: '300px', position: 'fixed', top: 0, right: '100px'}}>
-        <Tree 
-            multiple={false}
-            icon={iconRem}
-            onSelect={onSelect}
-            onExpand={onExpand}
-            treeData={props.treeData}
-    />
-    </div>
+    return <Tree 
+    multiple={false}
+    defaultExpandAll
+    icon={iconRem}
+    onSelect={onSelect}
+    onExpand={onExpand}
+    treeData={props.treeData}
+/>
 }
 
 

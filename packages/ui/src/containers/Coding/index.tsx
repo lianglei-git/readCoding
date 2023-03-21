@@ -3,12 +3,20 @@ import { useAppStore } from "@/hooks"
 import { writeIndexJS } from "@/webContainer"
 import { reaction } from "mobx"
 import { observer } from "mobx-react-lite"
-
+import FilesTree from "@/components/FilesTree";
+import './index.less'
+import { SpButton } from "@/components/RewriteUI"
+import { useState } from "react"
 
 /** write code */
 const CodingContainer = () => {
+    const [show, setShow] = useState(false);
 
-    return <div className="CodingContainer">代码编写</div>
+    return <>
+    <SpButton classname='folderButton' onClick={() => setShow(!show)} type={'link'} icon="sp-icon-folder"></SpButton>
+    <div className="CodingContainer">
+        <div className={['treeContainer', show? 'active': ''].join(' ')}> <FilesTree /></div>
+    </div></>
 }
 
 const tmpl_CSS = `
