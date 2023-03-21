@@ -37,6 +37,7 @@ const ToolLayout = () => {
     <sp-popover
       placement="right"
       // title="修改布局"
+      effect="dark"
       content={`
             <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Horizontal})">Horizontal</sp-button2>
             <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Mutant})">Mutant</sp-button2>

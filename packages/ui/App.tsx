@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import './App.less'
 import FilesTree from "@/components/FilesTree";
 import './src/webContainer'
+import './public/reset.css'
 
 
 const App = () => {

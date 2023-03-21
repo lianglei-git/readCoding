@@ -33,11 +33,11 @@ const BookShelf = (props:any) => {
           onDoubleClick={onDoubleClick}
           className={["book_shelf-main__item", item.key == books.activeBook?.key ? 'active' : ''].join(' ')} 
           key={item.key}>
-            <dd>封面</dd>
-            <dt>
-              <p>{item.bookName}</p>
-              <p>{item.author}</p>
-            </dt>
+            <dt><img src={item.cover} alt="" /></dt>
+            <dd>
+              <p className="bookName">{item.bookName}</p>
+              <p className="author">{item.author}</p>
+            </dd>
           </dl>
         );
       })}

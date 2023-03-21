@@ -3,18 +3,64 @@
     display: flex;
     flex-wrap: wrap;
     &__item {
-        width: 100px;
-        height: 130px;
-        background: #fdf2f2;
+        width: 45%;
+        height: 110px;
+        background-color: #f6f7f9;
         margin: 5px;
+        padding: 12px 10px;
         box-sizing: border-box;
-        border-radius: 3px;
+        border-radius: 6px;
+        display: flex;
         &.active {
-            filter: drop-shadow(2px 0px 6px #948d8d);
+            // filter: drop-shadow(2px 0px 6px #948d8d);
+            background-color: #edeeef;
         }
         &:hover {
-            filter: drop-shadow(2px 0px 6px #948d8d);
+            // filter: drop-shadow(2px 0px 6px #948d8d);
+            background-color: #edeeef;
+            cursor: pointer;
         }
+            dt {
+                width: 68px;
+                // height: 98px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            dd {
+                flex: 1;
+                padding-left: 18px;
+                .bookName {
+                    font-size: 16px;
+    font-family: "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif;
+    color: #eef0f4;
+    line-height: 24px;
+    overflow: hidden;
+    height: 48px;
+    display: -webkit-box;
+    display: -moz-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -webkit-text-size-adjust: none;
+    box-orient: vertical;
+    height: auto;
+    max-height: 48px;
+    word-break: break-all;
+    color: #212832;
+    font-size: 15px;
+    word-break: break-all;
+                }
+                .author {
+                    color: #858c96;
+                    font-size: 13px;
+                    margin-top: 6px;
+                    max-height: 22px;
+                }
+            }
     }
  }
 }

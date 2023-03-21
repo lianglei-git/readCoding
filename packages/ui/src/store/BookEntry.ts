@@ -3,6 +3,12 @@ import Spui from "@sparrowend/ui";
 import localforage from "localforage";
 import { computed, makeAutoObservable, makeObservable, observable, reaction, toJS } from "mobx";
 import { Localforage_key_Any, Localforage_key_Books } from "./private";
+import pdfImg from '../../public/imgs/pdf-icon.png'
+
+const default_cover_Map = {
+    'application/pdf' : pdfImg
+}
+
 
 const ErrorTip = (Spui.Message as any).error
 const SuccessTip = (Spui.Message as any).success
@@ -13,7 +19,8 @@ enum FileType {
 }
 interface IBookFile extends File {
     path?: string,
-    type: FileType
+    type: FileType,
+    cover?: any
 }
 
 interface CoreBookType {
@@ -70,11 +77,19 @@ class BookItem {
         return this.File.size;
     }
 
+    get cover() {
+        return this._cover || (default_cover_Map as any)[this.bookType]
+    }
+
+    set cover(v: any) {
+        this._cover = v;
+    }
+
     lastPage = -1;
 
     key:string =  Date.now()+'';
 
-    cover = '';
+    _cover = '';
 
     description = '';
 
@@ -217,7 +232,6 @@ class BookEntry {
     }
 
     isSupportFileType(File: IBookFile):boolean {
-        return true
         if(File.type == FileType.pdf){
             return true;
         }
