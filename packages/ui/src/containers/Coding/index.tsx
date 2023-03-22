@@ -6,17 +6,34 @@ import { observer } from "mobx-react-lite"
 import FilesTree from "@/components/FilesTree";
 import './index.less'
 import { SpButton } from "@/components/RewriteUI"
-import { useState } from "react"
+import React, { useState } from "react"
+import * as monaco from "monaco-editor";
+
+
+const AnyContainer = () => {
+    const app = useAppStore();
+    const onMount = (instance:monaco.editor.IStandaloneCodeEditor) => {
+        reaction(() => app.Coding.CurPanelCode, e => {
+            const model = monaco.editor.createModel(app.Coding.CurPanelCode, app.Coding.CurExtname )
+            instance.setModel(model);
+        })
+    }
+    const onChangeValue = (value) => {
+        writeIndexJS(app.Coding.CurPath, value)
+    }
+    return <div> <CodeEditor value={app.Coding.CurPanelCode} language={app.Coding.CurExtname} onMount={onMount} onChangeValue={onChangeValue}/></div>
+}
 
 /** write code */
 const CodingContainer = () => {
     const [show, setShow] = useState(false);
-
     return <>
     <SpButton classname='folderButton' onClick={() => setShow(!show)} type={'link'} icon="sp-icon-folder"></SpButton>
     <div className="CodingContainer">
         <div className={['treeContainer', show? 'active': ''].join(' ')}> <FilesTree /></div>
-    </div></>
+    </div>
+    <AnyContainer />
+    </>
 }
 
 const tmpl_CSS = `

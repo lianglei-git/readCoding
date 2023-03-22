@@ -39,7 +39,7 @@ const CodeEditor = (props: ICodeEditorType) => {
       codeContainer.current as unknown as HTMLElement,
       {
         value: props.value,
-        language: props.language,
+        language:'typescript',
         minimap: {
           // 关闭小地图
           enabled: false,
@@ -51,8 +51,7 @@ const CodeEditor = (props: ICodeEditorType) => {
     
     instance.onDidChangeModelContent(() => {
       // 获取到当前编辑内容
-    props.onChangeValue?.(instance.getValue());
-
+      props.onChangeValue?.(instance.getValue());
     });
   }, []);
   return <div ref={codeContainer} className="CodeEditor"></div>;

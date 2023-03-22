@@ -37,9 +37,9 @@ const Layout = () => {
             <ReactGridLayout
               onDragStart={onDragStart}
               cols={6}
+              rowHeight={window.innerHeight / 6 - 20}
               layout={item.children}
             >
-              
               {item.children.map(
                 (i2: any, i2Index: number) =>
                   i2.show && (
@@ -66,10 +66,9 @@ const Layout = () => {
     <ReactGridLayout
       className="layout"
       compactType={"horizontal"}
-      // style={{height: window.innerHeight}}
       layout={layout}
       cols={6}
-      // rowHeight={210}
+      rowHeight={window.innerHeight / 6 - 10}
       autoSize
       onLayoutChange={onLayoutChange}
     >

@@ -1,14 +1,23 @@
 export * from './fullScreen'
 
+
+const languageMap = {
+    'ts': 'typescript',
+    'tsx': 'typescript'
+}
+
 function webcontainerFiles_to_treeData(files){
     let treeData:any[] = []
     function recursion(target:any,_treeData:any[] = [], _path:any = '') {
         for(let k in target) {
-            const path = _path +'/'+ k
+            const path = _path +'/'+ k;
+            const exact = path.lastIndexOf('.');
+            const extname = path.slice(exact+1)
             let newTree:any = {
                 key: k,
                 title: k,
-                path
+                path,
+                extname: languageMap[extname] ? languageMap[extname]: extname
             }
             _treeData.push(newTree)
             if(target[k].directory) {

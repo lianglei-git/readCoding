@@ -49,8 +49,8 @@ body,
 html {
   min-height: 100%;
   width: 100%;
-  user-select: none;
-  overflow: auto;
+  /* user-select: none; */
+  /* overflow: auto; */
 }
 
 h1,
@@ -145,11 +145,6 @@ a:hover {
   text-decoration: underline;
 }
 
-body {
-  overflow: hidden;
-  min-width: 1366px;
-  min-height: 768px;
-}
 
 /*滚动条*/
 ::-webkit-scrollbar {

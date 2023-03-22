@@ -4,20 +4,18 @@ import { AppStoreContext, appStore } from "./src/store/index";
 import UploadFile from "@/components/UploadFile";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
+import './public/reset.css'
 import './App.less'
 import './src/webContainer'
-import './public/reset.css'
 
 
 const App = () => {
   return (
     <AppStoreContext.Provider value={appStore}>
-      <div>
         <Navbar />
         {/* <CodeEditor /> */}
         {/* <UploadFile /> */}
         <Layout />
-      </div>
     </AppStoreContext.Provider>
   );
 };

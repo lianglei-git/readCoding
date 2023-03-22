@@ -12,7 +12,9 @@ import 'xterm/css/xterm.css';
 
 
 export async function writeIndexJS(path:string, content: string) {
+  if(webcontainerInstance && webcontainerInstance.fs) {
     await webcontainerInstance.fs.writeFile(path, content);
+  }
 };
 
 /** @type {import('@webcontainer/api').WebContainer}  */
