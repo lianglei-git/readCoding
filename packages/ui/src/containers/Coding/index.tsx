@@ -9,7 +9,6 @@ import { SpButton } from "@/components/RewriteUI"
 import React, { useState } from "react"
 import * as monaco from "monaco-editor";
 
-
 const AnyContainer = () => {
     const app = useAppStore();
     const onMount = (instance:monaco.editor.IStandaloneCodeEditor) => {
