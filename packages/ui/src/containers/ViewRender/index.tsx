@@ -1,5 +1,6 @@
 import { useAppStore } from "@/hooks";
 import { observer } from "mobx-react-lite";
+import './index.less'
 
 const ViewRenderContainerTips = () => {
     return <div style={{height: '400px'}}>

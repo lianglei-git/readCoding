@@ -1,6 +1,13 @@
 .ViewRenderContainer{
+    display: flex;
+    flex-direction: column;
     iframe {
+        flex: 1;
+        height: 1px;
         width: 100%;
         min-width: 300px;
+    }
+    .terminal {
+        overflow: auto;
     }
 }

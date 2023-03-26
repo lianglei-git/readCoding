@@ -1,0 +1,10 @@
+#panel1 {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+#panel2 {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(64, 255, 0);
+}

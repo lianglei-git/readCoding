@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import TreeExample from './demo2';
 import Tree from 'rc-tree';
-import { useAppStore } from '@/hooks';
+import { useAddDir, useAddFile, useAppStore } from '@/hooks';
 import TreeFiles from './tree';
 import './index.less'
+import { observer } from 'mobx-react-lite';
+import { reaction, toJS } from 'mobx';
+import { SpButton } from '../RewriteUI';
 
 
 // {
@@ -22,12 +25,20 @@ import './index.less'
 /** Files Select at Coding */
 const FilesTree = () => {
     const app =useAppStore();
+    const AddFile = useAddFile();
+    const AddDir = useAddDir()
     const onSelect = (k, info) => {
         app.Coding.setCurFileInfo(info.node);
         // app.Coding.setCurPath(info.node.path)
         // app.Coding.setCurPanelCode(info.node.content)
     }
-    return  <TreeFiles treeData={app.TreeData} onSelect={onSelect} />
+    return  <div>
+<div className='constrol'>
+    <SpButton type={'link'}  size='mini' onClick={AddFile} icon='sp-icon-chakanwenjianmulu'></SpButton>
+    <SpButton type={'link'}  size='mini' onClick={AddDir} icon='sp-icon-folder'></SpButton>
+</div>
+<TreeFiles treeData={app.TreeData} onSelect={onSelect} />
+    </div>
 }
 
-export default FilesTree;
+export default observer(FilesTree);

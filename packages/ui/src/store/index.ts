@@ -1,16 +1,20 @@
 import React from "react";
 import BookEntry from "./BookEntry";
 import SettingAndLoadStore from "./SettingAndLoad";
-import { makeObservable, observable } from "mobx";
+import { computed, makeAutoObservable, makeObservable, observable } from "mobx";
 import { webcontainerFiles_to_treeData } from "@/utils";
 import CodingStore from "./Coding";
 
 class AppStore {
     constructor() {
-        makeObservable(this, {
-            BootContainerInfo: observable
-        })
+        // makeObservable(this, {
+        //     BootContainerInfo: observable,
+        //     _treeData: observable,
+        //     TreeData: computed
+        // })
+        makeAutoObservable(this);
     }
+
     Coding = new CodingStore();
     Books = new BookEntry();
     Setting = new SettingAndLoadStore(this);
@@ -19,9 +23,14 @@ class AppStore {
         isLoadedBootContainer: false,
         src: ''
     }
-    BootContainerFiles= (process as any).env.template
+    BootContainerFiles= (process as any).env.template;
+
+    _treeData = webcontainerFiles_to_treeData(this.BootContainerFiles)
     get TreeData() {
-        return webcontainerFiles_to_treeData(this.BootContainerFiles)
+        return this._treeData;
+    }
+    set TreeData(value) {
+        this._treeData = value;
     }
 }
 

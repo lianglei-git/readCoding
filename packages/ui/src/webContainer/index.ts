@@ -13,9 +13,27 @@ import 'xterm/css/xterm.css';
 
 export async function writeIndexJS(path:string, content: string) {
   if(webcontainerInstance && webcontainerInstance.fs) {
+    console.log(path,'writeIndexJS')
     await webcontainerInstance.fs.writeFile(path, content);
   }
 };
+
+function createFile() {
+
+}
+
+function createDir(path:string) {
+  webcontainerInstance.fs.mkdir(path);
+}
+
+export function webcontainerCreate(path, isDir) {
+  if(isDir) {
+    createDir(path);
+  }else {
+    writeIndexJS(path, '');
+  }
+}
+
 
 /** @type {import('@webcontainer/api').WebContainer}  */
 let webcontainerInstance: any;
