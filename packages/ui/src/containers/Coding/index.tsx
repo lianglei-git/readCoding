@@ -1,7 +1,7 @@
 import CodeEditor from "@/components/CodeEditor"
 import { useAppStore } from "@/hooks"
 import { writeIndexJS } from "@/webContainer"
-import { reaction } from "mobx"
+import { reaction, toJS } from "mobx"
 import { observer } from "mobx-react-lite"
 import FilesTree from "@/components/FilesTree";
 import './index.less'
@@ -18,6 +18,21 @@ const AnyContainer = () => {
         })
     }
     const onChangeValue = (value) => {
+        if(!app.Coding.curFileInfo) return '';
+        const pos:string[] = app.Coding.curFileInfo.pos.split('-');
+        pos.shift();
+        let index = pos.shift();
+        let clone_data = toJS(app.TreeData);
+        let finData = clone_data[index];
+        while(pos.length > 0) {
+            index = pos.shift()
+            if(finData?.children)  {
+                finData = finData.children
+            }
+            finData = finData[index]
+        }
+        finData.content = value
+        app.TreeData = clone_data;
         writeIndexJS(app.Coding.CurPath, value)
     }
     return <div> <CodeEditor value={app.Coding.CurPanelCode} language={app.Coding.CurExtname} onMount={onMount} onChangeValue={onChangeValue}/></div>
