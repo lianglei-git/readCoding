@@ -33,6 +33,7 @@ const TreeFiles = (props) =>{
     return <Tree 
     multiple={false}
     showLine
+    // expandedKeys={props.expandedKeys}
     // checkStrictly
     defaultExpandAll
     icon={iconRem}

@@ -18,6 +18,10 @@ class CodingStore {
     curFileInfo!:ICurFileInfo;
 
     get CurExtname () {
+        if(this.curFileInfo?.extname.includes('js')) {
+            return 'javascript'
+        }
+        console.log(this.curFileInfo?.extname,'this.curFileInfo?.extname')
         return this.curFileInfo?.extname
     }
 

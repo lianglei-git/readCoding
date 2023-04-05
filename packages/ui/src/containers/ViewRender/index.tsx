@@ -1,10 +1,13 @@
 import { useAppStore } from "@/hooks";
 import { observer } from "mobx-react-lite";
+import React from 'react';
 import './index.less'
 
 const ViewRenderContainerTips = () => {
-    return <div style={{height: '400px'}}>
-        等等 webcontainer 在注册呢
+    return <div style={{height: '400px', textAlign: 'center', paddingTop: 100}}>
+        <p>Install 🎉</p>
+        <p>1. cd template/~</p>
+        <p>2. pnpm install && pnpm dev</p>
     </div>
 }
 

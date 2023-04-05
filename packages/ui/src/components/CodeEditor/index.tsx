@@ -14,6 +14,7 @@ console.log(TypeReact,'TypeReact')
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
+    console.log(label,'labellabellabellabel')
     if (label === "json") {
       return new jsonWorker();
     }
@@ -48,13 +49,11 @@ interface ICodeEditorType {
 const CodeEditor = (props: ICodeEditorType) => {
   const codeContainer = useRef(null);
   useLayoutEffect(() => {
-
-
     const instance = monaco.editor.create(
       codeContainer.current as unknown as HTMLElement,
       {
         value: props.value,
-        language:'typescript',
+        language: 'javascript',
         minimap: {
           // 关闭小地图
           enabled: false,

@@ -52,7 +52,7 @@ window.addEventListener('load', async () => {
   setTimeout(() => {
     const terminalEl: any = document.querySelector('.terminal');
     terminal.open(terminalEl);
-  }, 5000)
+  })
   // Call only once
 
   webcontainerInstance = await WebContainer.boot();

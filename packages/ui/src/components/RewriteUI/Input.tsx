@@ -11,6 +11,7 @@ interface ISpInputProps {
   onFocus?: (e: Event) => void;
   onClick?: (e: Event) => void;
   onChange?: (e: Event) => void;
+  onPressEnter?: (v:string, e: Event) => void;
 }
 
 const SpInput = forwardRef((props: ISpInputProps, ref: Ref<any>) => {
@@ -22,6 +23,9 @@ const SpInput = forwardRef((props: ISpInputProps, ref: Ref<any>) => {
         e.stopPropagation();
         props?.onClick?.(e);
     }
+    inputRef.current.onPressEnter = (e:Event) => {
+      props?.onPressEnter?.(e, Input);
+  }
     Input.onblur = (e:Event) => {
         props?.onBlur?.(e);
     }

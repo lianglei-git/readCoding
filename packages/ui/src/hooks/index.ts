@@ -1,6 +1,5 @@
 import { AppStoreContext } from "@store/index";
 import { useContext } from "react";
-export * from './fileHooks'
 const useAppStore = () => {
     return useContext(AppStoreContext)
 }
