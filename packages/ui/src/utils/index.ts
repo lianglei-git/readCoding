@@ -14,7 +14,7 @@ function webcontainerFiles_to_treeData(files){
             const exact = path.lastIndexOf('.');
             const extname = path.slice(exact+1)
             let newTree:any = {
-                key: k,
+                key: path,
                 title: k,
                 path,
                 extname: languageMap[extname] ? languageMap[extname]: extname

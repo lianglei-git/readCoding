@@ -1,5 +1,6 @@
 import { AppStoreContext } from "@store/index";
 import { useContext } from "react";
+import useKeydown from './useKeydown'
 const useAppStore = () => {
     return useContext(AppStoreContext)
 }
@@ -24,5 +25,6 @@ export {
     useAppStore,
     useActiveBook,
     useBooks,
-    useSettingStore
+    useSettingStore,
+    useKeydown
 }

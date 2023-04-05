@@ -1,5 +1,5 @@
 import CodeEditor from "@/components/CodeEditor"
-import { useAppStore } from "@/hooks"
+import { useAppStore, useKeydown } from "@/hooks"
 import { writeIndexJS } from "@/webContainer"
 import { reaction, toJS } from "mobx"
 import { observer } from "mobx-react-lite"
@@ -41,6 +41,23 @@ const AnyContainer = () => {
 /** write code */
 const CodingContainer = () => {
     const [show, setShow] = useState(false);
+
+    const app = useAppStore();
+    useKeydown({
+        CommandDelete(){
+            // setVisible(true);
+            const modal = Spui.Modal.config({
+                visible: true,
+                bodyhtml: '是否删除',
+                onOk() {
+                    app.TreeStore.deletePositionData();
+                    modal.show(false)
+                },
+                onCancel: () => modal.show(false)
+            })
+        }
+    })
+
     return <>
     <SpButton classname='folderButton' onClick={() => setShow(!show)} type={'link'} icon="sp-icon-folder"></SpButton>
     <div className="CodingContainer">

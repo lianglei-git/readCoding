@@ -98,7 +98,7 @@ class TreeDataStore {
   deletePositionData(_pos: string = this.app.Coding.curFileInfo?.pos) {
     if (!_pos || _pos.length < 1) return;
     const pos: any[] = _pos.split("-");
-    const findData = this.findSelectedParent(_pos);
+    const findData = this.findSelectedParent(_pos, false);
     const idx = pos[pos.length - 1];
     findData.findLevelData.splice(idx, 1);
     this.reWriteValue(findData.targetData);
