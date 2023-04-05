@@ -4,6 +4,7 @@ import SettingAndLoadStore from "./SettingAndLoad";
 import { computed, makeAutoObservable, makeObservable, observable } from "mobx";
 import { webcontainerFiles_to_treeData } from "@/utils";
 import CodingStore from "./Coding";
+import TreeDataStore from "./private/treeDataState";
 
 class AppStore {
     constructor() {
@@ -23,14 +24,13 @@ class AppStore {
         isLoadedBootContainer: false,
         src: ''
     }
-    BootContainerFiles= (process as any).env.template;
+    TreeStore = new TreeDataStore(this);
 
-    _treeData = webcontainerFiles_to_treeData(this.BootContainerFiles)
     get TreeData() {
-        return this._treeData;
+        return this.TreeStore.value;
     }
     set TreeData(value) {
-        this._treeData = value;
+        this.TreeStore.value = value;
     }
 }
 

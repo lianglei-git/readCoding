@@ -28,6 +28,7 @@ const FilesTree = () => {
   const AddDir = useAddDir();
   const onSelect = (k, info) => {
     app.Coding.setCurFileInfo(info.node);
+    app.TreeStore.findSelectedParent();
     // app.Coding.setCurPath(info.node.path)
     // app.Coding.setCurPanelCode(info.node.content)
   };
@@ -47,7 +48,7 @@ const FilesTree = () => {
           icon="sp-icon-folder"
         ></SpButton>
       </div>
-      <TreeFiles treeData={app.TreeData} onSelect={onSelect} />
+      <TreeFiles treeData={app.TreeStore.value} onSelect={onSelect} />
     </div>
   );
 };

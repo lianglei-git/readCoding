@@ -5,6 +5,8 @@ interface ICurFileInfo {
     content: string,
     extname: string,
     path: string,
+    pos: string,
+    children?: any[]
     // title: string,
 }
 class CodingStore {
@@ -13,7 +15,7 @@ class CodingStore {
         makeAutoObservable(this);
     }
 
-    curFileInfo:ICurFileInfo| undefined;
+    curFileInfo!:ICurFileInfo;
 
     get CurExtname () {
         return this.curFileInfo?.extname

@@ -22,7 +22,7 @@ const AnyContainer = () => {
         const pos:string[] = app.Coding.curFileInfo.pos.split('-');
         pos.shift();
         let index = pos.shift();
-        let clone_data = toJS(app.TreeData);
+        let clone_data = toJS(app.TreeStore.value);
         let finData = clone_data[index];
         while(pos.length > 0) {
             index = pos.shift()
