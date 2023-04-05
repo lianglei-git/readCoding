@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "pnpm --filter ui start && pnpm start:wasm_demo && pnpm start:vite_tmpl",
+    "build": "pnpm --filter ui build && pnpm build:wasm_demo && pnpm build:vite_tmpl",
     "start:wasm_demo": "pnpm --filter webContainerApp_demo start",
+    "build:wasm_demo": "pnpm --filter webContainerApp_demo build",
     "start:vite_tmpl": "pnpm --filter webContainer_Vite start",
+    "build:vite_tmpl": "pnpm --filter webContainer_Vite build",
     "babel": "babel",
     "element": "node sparrowendui/test.js"
   },
