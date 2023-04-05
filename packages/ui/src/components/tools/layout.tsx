@@ -41,6 +41,7 @@ const ToolLayout = () => {
       content={`
             <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Horizontal})">Horizontal</sp-button2>
             <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Mutant})">Mutant</sp-button2>
+            <sp-button2 type='link' onclick="changeLayout(${LayoutEnmu.Static})">Static</sp-button2>
             `}
       get-popup-container=".mutant_navbar"
     >

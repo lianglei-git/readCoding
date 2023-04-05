@@ -14,7 +14,16 @@ const Layout = () => {
   const layout = SettingStore.LayoutPlan;
 
   const onLayoutChange = (layout: any) => {
-    console.log(layout, "layout");
+    if(layout.length > 0) {
+      SettingStore.LayoutPlan = layout.map(item => {
+        SettingStore.LayoutPlan.map(i2 => {
+          if(i2.i == item.i) {
+            item = Object.assign(i2,item );
+          }
+        });
+        return item;
+      })
+    }
   };
   const onDragStart = (a, b, c, d, e: DragEvent) => {
     e.stopPropagation();
@@ -31,33 +40,32 @@ const Layout = () => {
             className="sp-icon sp-icon-close"
             onClick={(e) => onClose(item, index)}
           ></i>
-         <div key={item.i}>
-              <item.component />
-              {item.children && (
-            <ReactGridLayout
-              onDragStart={onDragStart}
-              cols={6}
-              rowHeight={window.innerHeight / 6 - 20}
-              layout={item.children}
-            >
-              {item.children.map(
-                (i2: any, i2Index: number) =>
-                  i2.show && (
-                    <div key={i2.i} className="wh100">
-                      <div>
-                        <i
-                          className="sp-icon sp-icon-close"
-                          onClick={(e) => onClose(i2, i2Index)}
-                        ></i>{" "}
-                        <i2.component />{" "}
+          <div key={item.i}>
+            <item.component />
+            {item.children && (
+              <ReactGridLayout
+                onDragStart={onDragStart}
+                cols={6}
+                rowHeight={window.innerHeight / 6 - 20}
+                layout={item.children}
+              >
+                {item.children.map(
+                  (i2: any, i2Index: number) =>
+                    i2.show && (
+                      <div key={i2.i} className="wh100">
+                        <div>
+                          <i
+                            className="sp-icon sp-icon-close"
+                            onClick={(e) => onClose(i2, i2Index)}
+                          ></i>{" "}
+                          <i2.component />{" "}
+                        </div>
                       </div>
-                    </div>
-                  )
-              )}
-            </ReactGridLayout>
-          )}
-            </div>
-         
+                    )
+                )}
+              </ReactGridLayout>
+            )}
+          </div>
         </div>
       )
     );

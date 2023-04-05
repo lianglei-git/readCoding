@@ -4,7 +4,8 @@ import ViewRenderContainer from "@/containers/ViewRender"
 
 export enum LayoutEnmu {
     Horizontal,
-    Mutant
+    Mutant,
+    Static
 }
 
 const codePlan1 = [
@@ -28,9 +29,9 @@ const codePlan2 = [
 ]
 
 const planLayoutMain_Horizontal: LayoutEnmu.Horizontal | any = [
-    { i: 'read', x: 2, y: 0, w: 2, h: 6, component: ReadBookContainer, show: true },
+    { i: 'read', x: 0, y: 0, w: 2, h: 6,  component: ReadBookContainer, show: true },
     { i: 'view', x: 4, y: 0, w: 2, h: 6, component: ViewRenderContainer, show: true },
-    { i: 'code', x: 6, y: 0, w: 2, h: 6, /** children: codePlan2, */show: true, component: CodingContainer }
+    { i: 'code', x: 2, y: 0, w: 2, h: 6, /** children: codePlan2, */show: true, component: CodingContainer }
 ]
 
 
