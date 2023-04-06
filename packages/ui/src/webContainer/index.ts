@@ -13,7 +13,7 @@ import 'xterm/css/xterm.css';
 
 export async function writeIndexJS(path: string, content: string) {
   if (webcontainerInstance && webcontainerInstance.fs) {
-    console.log(path, 'writeIndexJS')
+    // console.log(path, 'writeIndexJS')
     await webcontainerInstance.fs.writeFile(path, content);
   }
 };

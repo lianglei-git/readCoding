@@ -4,6 +4,9 @@ import { computed, makeObservable, observable, toJS } from "mobx";
 import { ChangePositionDataNameInput } from "./treeNameCmp";
 import React from "react";
 
+// console.log(process.env,'import.meta.envimport.meta.env')
+
+
 /** 内部为data 外部为value */
 class TreeDataStore {
   constructor(public app: AppStore) {
@@ -13,7 +16,7 @@ class TreeDataStore {
       expandedKeys: observable
     });
   }
-  OriginBootContainerFiles = (globalThis as any).process.env.template;
+  OriginBootContainerFiles = (process as any).env.template;
   _data = webcontainerFiles_to_treeData(this.OriginBootContainerFiles);
 
   static NotSureDisposeForPosition(_pos: string): (string | number)[] {

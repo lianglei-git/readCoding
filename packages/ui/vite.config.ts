@@ -2,11 +2,15 @@ import { defineConfig } from 'vite'
 import babel from 'vite-plugin-babel';
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+// import monacoEditorPlugin from "vite-plugin-monaco-editor"
 import {transform_webcontainerFiles} from './private/transforms.node'
 function _resolve(dir: string) {
   return path.resolve(__dirname, dir)
 }
 
+
+// console.log(monacoEditorPlugin.default,'monacoEditorPluginmonacoEditorPluginmonacoEditorPlugin')
 const template = transform_webcontainerFiles(_resolve('./template'));
 export default defineConfig({
   base: './',
@@ -16,6 +20,9 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Resource-Policy' :'same-origin' 
     }
+  },
+  build: {
+    // minify: 'terser',
   },
   plugins: [
     react({
@@ -28,6 +35,12 @@ export default defineConfig({
         ],
       }
     }),
+    // monacoEditorPlugin.default({}),
+    process.env.NODE_ENV == 'production' && viteStaticCopy({
+      targets: [
+        {src: './public', dest: './'}
+      ]
+    })
     // babel()
     // babel({
     //     babelConfig: 
@@ -58,6 +71,7 @@ export default defineConfig({
       '@components': _resolve('src/components'),
     },
   },
+  publicDir: false,
   define: {
     'process.env': {
       template 
