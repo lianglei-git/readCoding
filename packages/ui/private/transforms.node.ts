@@ -3,7 +3,7 @@ import path from "path";
 
 // const baseProjectCwd = path.resolve(`./test/react_tmpl`);
 
-const paichu = ["node_modules"];
+let Exclude = ["node_modules"];
 
 function transform_webcontainerFiles(_targetCwd, _map = {}) {
     const dirname = path.basename (_targetCwd);
@@ -15,7 +15,7 @@ function transform_webcontainerFiles(_targetCwd, _map = {}) {
             return;
         }
         files.forEach((everyFiles) => {
-            if (paichu.includes(everyFiles)) return;
+            if (Exclude.includes(everyFiles)) return;
             const everyPath = path.resolve(targetCwd, everyFiles);
             const stats = fs.statSync(everyPath)
             if (!stats) {
@@ -28,10 +28,9 @@ function transform_webcontainerFiles(_targetCwd, _map = {}) {
                 }
                 recursion(everyPath, map[everyFiles].directory);
             } else {
+                let contents = fs.readFileSync(everyPath, "utf-8");                
                 map[everyFiles] = {
-                    file: {
-                        contents: fs.readFileSync(everyPath, "utf-8"),
-                    },
+                    file: { contents: contents/** .replaceAll('process.env.NODE_ENV', '__DEV__') */ }
                 };
             }
         });
@@ -40,6 +39,10 @@ function transform_webcontainerFiles(_targetCwd, _map = {}) {
 
      recursion(_targetCwd, _map[dirname].directory = {});
      return _map;
+}
+
+transform_webcontainerFiles.setExclude = (k: string[] = []) => {
+    Exclude = [...k, ...Exclude]
 }
 
 

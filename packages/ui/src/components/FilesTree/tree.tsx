@@ -35,7 +35,7 @@ const TreeFiles = (props) =>{
     showLine
     // expandedKeys={props.expandedKeys}
     // checkStrictly
-    defaultExpandAll
+    // defaultExpandAll
     icon={iconRem}
     onSelect={onSelect}
     onExpand={onExpand}

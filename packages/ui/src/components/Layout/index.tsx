@@ -7,6 +7,12 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import "./index.less";
 import { observer } from "mobx-react-lite";
+import { ViewMap } from "@store/private/layoutConst";
+
+const Cmp = (Props:any) => {
+  return <Props.component />
+}
+
 // 1. https://boychina.github.io/posts/2020-09-27-react-grid-layout
 // 2. https://blog.csdn.net/wang19970228/article/details/123514152
 const Layout = () => {
@@ -14,15 +20,15 @@ const Layout = () => {
   const layout = SettingStore.LayoutPlan;
 
   const onLayoutChange = (layout: any) => {
-    if(layout.length > 0) {
-      SettingStore.LayoutPlan = layout.map(item => {
-        SettingStore.LayoutPlan.map(i2 => {
-          if(i2.i == item.i) {
-            item = Object.assign(i2,item );
+    if (layout.length > 0) {
+      SettingStore.LayoutPlan = layout.map((item) => {
+        SettingStore.LayoutPlan.map((i2) => {
+          if (i2.i == item.i) {
+            item = Object.assign(i2, item);
           }
         });
         return item;
-      })
+      });
     }
   };
   const onDragStart = (a, b, c, d, e: DragEvent) => {
@@ -32,6 +38,9 @@ const Layout = () => {
   const onClose = (item: any, idx: number) => {
     item.show = false;
   };
+
+
+
   const content = layout.map((item: any, index: number) => {
     return (
       item.show && (
@@ -41,7 +50,8 @@ const Layout = () => {
             onClick={(e) => onClose(item, index)}
           ></i>
           <div key={item.i}>
-            <item.component />
+            <Cmp component={ViewMap[item.i]}/>
+            {/* {ViewMap[item.i]()} */}
             {item.children && (
               <ReactGridLayout
                 onDragStart={onDragStart}
@@ -58,7 +68,8 @@ const Layout = () => {
                             className="sp-icon sp-icon-close"
                             onClick={(e) => onClose(i2, i2Index)}
                           ></i>{" "}
-                          <i2.component />{" "}
+                            <Cmp component={ViewMap[i2.i]}/>
+                          {/* {ViewMap[i2.i]()} */}
                         </div>
                       </div>
                     )

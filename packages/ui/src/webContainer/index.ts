@@ -3,6 +3,7 @@
 
 import { appStore } from '@store/index';
 import { WebContainer } from '@webcontainer/api';
+import { reaction } from 'mobx';
 import { Terminal } from 'xterm'
 import 'xterm/css/xterm.css';
 
@@ -11,9 +12,9 @@ import 'xterm/css/xterm.css';
 
 
 
-export async function writeIndexJS(path: string, content: string) {
+export async function writeFileContent(path: string, content: string) {
   if (webcontainerInstance && webcontainerInstance.fs) {
-    // console.log(path, 'writeIndexJS')
+    // console.log(path, 'writeFileContent')
     await webcontainerInstance.fs.writeFile(path, content);
   }
 };
@@ -30,10 +31,13 @@ export function webcontainerCreate(path, isDir) {
   if (isDir) {
     createDir(path);
   } else {
-    writeIndexJS(path, '');
+    writeFileContent(path, '');
   }
 }
 
+export const terminal: any = new Terminal({
+  convertEol: true,
+});
 
 /** @type {import('@webcontainer/api').WebContainer}  */
 let webcontainerInstance: any;
@@ -43,27 +47,32 @@ window.addEventListener('load', async () => {
   // textareaEl.value = value //Files['index.js'].file.contents;
   // textareaEl.addEventListener('input', (e) => {
   //     console.log(e.currentTarget.value)
-  //     writeIndexJS(e.currentTarget.value);
+  //     writeFileContent(e.currentTarget.value);
   // });
 
-  const terminal: any = new Terminal({
-    convertEol: true,
-  });
-  setTimeout(() => {
-    const terminalEl: any = document.querySelector('.terminal');
-    terminal.open(terminalEl);
-  })
+
+  // setTimeout(() => {
+  //   const terminalEl: any = document.querySelector('.terminal');
+  //   terminal.open(terminalEl);
+  // })
   // Call only once
 
   webcontainerInstance = await WebContainer.boot();
-  await webcontainerInstance.mount(appStore.TreeStore.OriginBootContainerFiles);
-  // const packageJSON = await webcontainerInstance.fs.readFile('./react_tmpl/package.json', 'utf-8');
-  // console.log(packageJSON);
-  webcontainerInstance.on('server-ready', (port: any, url: any) => {
-    appStore.BootContainerInfo.isLoadedBootContainer = true;
-    appStore.BootContainerInfo.src = url
-  });
-  startShell(terminal);
+  const dispose = reaction(() => appStore.Setting.PersistableLoadProcess.value, async (v) => {
+    if (v >= 90) {
+      await webcontainerInstance.mount(appStore.TreeStore.OriginBootContainerFiles);
+      installDependencies(terminal)
+      // const packageJSON = await webcontainerInstance.fs.readFile('./react_tmpl/package.json', 'utf-8');
+      // console.log(packageJSON);
+      webcontainerInstance.on('server-ready', (port: any, url: any) => {
+        console.log('记载完成!!!! url  :::: ', url)
+        appStore.BootContainerInfo.isLoadedBootContainer = true;
+        appStore.BootContainerInfo.src = url
+      });
+      startShell(terminal);
+      dispose();
+    }
+  }, { fireImmediately: true });
 });
 
 /**

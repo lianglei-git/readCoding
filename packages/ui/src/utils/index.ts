@@ -1,10 +1,10 @@
 export * from './fullScreen'
 
-
 const languageMap = {
     'ts': 'typescript',
     'tsx': 'typescript'
 }
+
 
 function webcontainerFiles_to_treeData(files){
     let treeData:any[] = []
@@ -12,7 +12,10 @@ function webcontainerFiles_to_treeData(files){
         for(let k in target) {
             const path = _path +'/'+ k;
             const exact = path.lastIndexOf('.');
-            const extname = path.slice(exact+1)
+            let extname = 'ts'
+            if(exact > -1) {
+                extname = path.slice(exact+1)
+            }
             let newTree:any = {
                 key: path,
                 title: k,

@@ -5,6 +5,10 @@ import { computed, makeAutoObservable, makeObservable, observable } from "mobx";
 import { webcontainerFiles_to_treeData } from "@/utils";
 import CodingStore from "./Coding";
 import TreeDataStore from "./private/treeDataState";
+import SpuiTesting from './plugins/Load/SpuiTesting'
+import Plugins from "./plugins";
+import { LoadingENUM } from "./plugins/Symbol";
+
 
 class AppStore {
     constructor() {
@@ -16,6 +20,16 @@ class AppStore {
         makeAutoObservable(this);
     }
 
+    static isCardCode = window.location.search.indexOf('cardCode') > -1;
+
+    static createPluginsParams() {
+        return [
+            /** card coding */
+            AppStore.isCardCode ? LoadingENUM['SpuiTesting'] : null
+        ]
+    }
+
+    plugins = new Plugins(this, AppStore.createPluginsParams());
     Coding = new CodingStore();
     Books = new BookEntry();
     Setting = new SettingAndLoadStore(this);
@@ -25,13 +39,6 @@ class AppStore {
         src: ''
     }
     TreeStore = new TreeDataStore(this);
-
-    get TreeData() {
-        return this.TreeStore.value;
-    }
-    set TreeData(value) {
-        this.TreeStore.value = value;
-    }
 }
 
 const appStore = new AppStore();

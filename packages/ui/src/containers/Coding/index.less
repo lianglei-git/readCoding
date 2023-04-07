@@ -4,7 +4,6 @@
     position: absolute;
     z-index: -1;
     top: 0;
-    // overflow: hidden;
     .treeContainer {
         position: absolute;
         left: 0%;
@@ -22,11 +21,24 @@
         }
       
     }
+    &.right {
+        z-index: 99;
+        overflow: hidden;
+        .treeContainer {
+            left: -50%;
+            &.active {
+                left: 0;
+            }
+        }
+    }
 }
 .react-grid-layout {
     background-color: #fff;
 }
 
+.react-resizable-handle {
+    z-index: 999!important;
+}
 .folderButton {
     padding: 0 !important;
     top: -21px;

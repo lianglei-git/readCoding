@@ -1,7 +1,7 @@
 import localforage from "localforage";
 import { AppStore } from ".";
 import { Localforage_key_Books } from "./private";
-import { makeObservable, observable, toJS } from "mobx";
+import { action, makeObservable, observable, toJS } from "mobx";
 import { makePersistable, isHydrated } from 'mobx-persist-store'; // 引入相关api
 import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu } from "./private/layoutConst";
 
@@ -34,11 +34,24 @@ class SettingAndLoadStore {
         value: -1,
         message: ''
     };
+
     constructor(app: AppStore) {
         makeObservable(this, {
             PersistableLoadProcess: observable,
             LayoutPlan: observable
         });
+        makePersistable(this, {
+            name: 'PersistSetting',
+            properties: ['LayoutPlan'],
+            storage: localStorage
+          }).then(
+            action(() => {
+                // 非ui代码实现
+                if(!AppStore.isCardCode) {
+                    this.PersistableLoadProcess.value = 100;
+                }
+            })
+          );
         // if(useType)
         localforage.getItem(Localforage_key_Books, (err, historyBooks) => {
             if (err) {
@@ -52,6 +65,7 @@ class SettingAndLoadStore {
             }
         })
     }
+
 }
 
 

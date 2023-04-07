@@ -4,8 +4,10 @@ import { computed, makeObservable, observable, toJS } from "mobx";
 import { ChangePositionDataNameInput } from "./treeNameCmp";
 import React from "react";
 
-// console.log(process.env,'import.meta.envimport.meta.env')
+import templateJSON from "../../../template.json";
 
+console.log(templateJSON, "templateJSON");
+// console.log(process.env,'import.meta.envimport.meta.env')
 
 /** 内部为data 外部为value */
 class TreeDataStore {
@@ -13,11 +15,19 @@ class TreeDataStore {
     makeObservable(this, {
       _data: observable,
       value: computed,
-      expandedKeys: observable
+      expandedKeys: observable,
     });
+    this.startup((process as any).env.template || templateJSON);
   }
-  OriginBootContainerFiles = (process as any).env.template;
-  _data = webcontainerFiles_to_treeData(this.OriginBootContainerFiles);
+  _data = null;
+  OriginBootContainerFiles = null;
+
+  startup(originBootContainerFiles: any) {
+    this.OriginBootContainerFiles = originBootContainerFiles;
+    this.reWriteValue(
+      webcontainerFiles_to_treeData(this.OriginBootContainerFiles)
+    );
+  }
 
   static NotSureDisposeForPosition(_pos: string): (string | number)[] {
     const pos = _pos.split("-");
@@ -33,14 +43,23 @@ class TreeDataStore {
     return toJS(this._data);
   }
 
-   expandedKeys = new Array();
+  expandedKeys = new Array();
 
   get value() {
     return this._data;
   }
 
-  set value(v) {
-    this._data = v;
+  findStringtoInfo(str: string) {
+    const targetData = this.copyTreeData();
+
+    let findData = targetData;
+    let isFind = true;
+
+    while (isFind) {
+      if (findData.length) {
+        // findData.map(target )
+      }
+    }
   }
 
   /**
@@ -62,7 +81,7 @@ class TreeDataStore {
     /** dispose directory */
     if (!isDir) {
       TreeDataStore.DisposeForDirPosition(pos);
-    }  
+    }
 
     /** top 0 */
     if (pos.length == 0) {
@@ -127,10 +146,10 @@ class TreeDataStore {
         path: findData.path + "/" + value,
         extname: ".js",
         key: value,
-      }
-      if(isDir) {
+      };
+      if (isDir) {
         pd.children = [];
-        pd.expanded = true
+        pd.expanded = true;
         // this.expandedKeys.push(value);
       }
       findData.findLevelData.push(pd);
@@ -143,7 +162,7 @@ class TreeDataStore {
       ),
       key: Date.now(),
     };
-    if(isDir) {
+    if (isDir) {
       nd.children = [];
     }
     findData.findLevelData.push(nd);

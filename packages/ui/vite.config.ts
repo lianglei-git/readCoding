@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import babel from 'vite-plugin-babel';
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import fs from 'fs'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 // import monacoEditorPlugin from "vite-plugin-monaco-editor"
 import {transform_webcontainerFiles} from './private/transforms.node'
@@ -10,8 +11,16 @@ function _resolve(dir: string) {
 }
 
 
+transform_webcontainerFiles.setExclude(['sparrow-ui-master'])
 // console.log(monacoEditorPlugin.default,'monacoEditorPluginmonacoEditorPluginmonacoEditorPlugin')
-const template = transform_webcontainerFiles(_resolve('./template'));
+let contents = transform_webcontainerFiles(_resolve('./template'))
+
+
+const template = contents;// ;
+// contents = JSON.stringify(contents);
+// contents.replaceAll('process.env.NODE_ENV', '__DEV__');
+// fs.writeFileSync('template.json', contents)
+
 export default defineConfig({
   base: './',
   server: {
@@ -74,7 +83,7 @@ export default defineConfig({
   publicDir: false,
   define: {
     'process.env': {
-      template 
+      template
     }
   }
 })

@@ -47,7 +47,7 @@ const textareaEl: any = document.querySelector('textarea');
 
 const terminalEl: any = document.querySelector('.terminal');
 
-async function writeIndexJS(content: string) {
+async function writeFileContent(content: string) {
     await webcontainerInstance.fs.writeFile('./react_tmpl/src/App.tsx', content);
 };
 /** @type {import('@webcontainer/api').WebContainer}  */
@@ -59,7 +59,7 @@ window.addEventListener('load', async () => {
     textareaEl.value = value //Files['index.js'].file.contents;
     textareaEl.addEventListener('input', (e) => {
         console.log(e.currentTarget.value)
-        writeIndexJS(e.currentTarget.value);
+        writeFileContent(e.currentTarget.value);
     });
 
     const terminal: any = new Terminal({
