@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import FilesTree from "@/components/FilesTree";
 import "./index.less";
 import { SpButton } from "@/components/RewriteUI";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as monaco from "monaco-editor";
 import Spui from "@sparrowend/ui";
 
@@ -111,6 +111,9 @@ const CodingContainer = () => {
       });
     }
   });
+
+  const isClassRight = () =>  containerRef.current &&
+  containerRef.current.getBoundingClientRect().x < 50
   const getCodingContainerClassName = () => {
     return [
       "CodingContainer",
@@ -122,23 +125,33 @@ const CodingContainer = () => {
         show? 'active': ''
     ].join(" ");
   };
+  const [visible, setVisible] = useState(false)
+  const cur = useRef()
+   useEffect(() => {
+      cur.current.onClose = () => setVisible(false)
+  }, [])
   return (
     <>
         <p className="code_attach"> 
         <SpButton
           classname="folderButton"
-          onClick={() => setShow(!show)}
+          onClick={() => setVisible(!visible)}
           type={"link"}
           icon="sp-icon-folder"
         ></SpButton>
         <span style={{marginLeft: 15}}> 目前仅支持<span style={{color: 'red',fontWeight:'bold'}}> command + s </span>保存代码!!</span>
         </p>
-      <div className={getCodingContainerClassName()} ref={containerRef}>
+        <sp-drawer placement={isClassRight()? 'right': 'left'} visible={visible} title='Basic Drawer' fullscreen='false' ref={cur}>
+            <div slot='content'> 
+            <FilesTree />
+            </div>
+        </sp-drawer>
+      {/* <div className={getCodingContainerClassName()} ref={containerRef}>
         <div className={["treeContainer", show ? "active" : ""].join(" ")}>
           {" "}
           <FilesTree />
         </div>
-      </div>
+      </div> */}
       <AnyContainer />
     </>
   );
