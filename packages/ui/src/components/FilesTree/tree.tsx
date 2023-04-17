@@ -77,6 +77,7 @@ const TreeFiles = (props) => {
       // checkStrictly
       // defaultExpandAll
       // switcherIcon={switcherIcon}
+      // defaultSelectedKeys={['/demo.tsx']}
       icon={iconRem}
       onSelect={onSelect}
       onExpand={onExpand}

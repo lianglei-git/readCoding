@@ -4,6 +4,7 @@ import * as monaco from "monaco-editor";
 const languageMap = {
     'ts': 'typescript',
     'js': 'javascript',
+    'jsx': 'javascript',
     'tsx': 'typescript'
 }
 

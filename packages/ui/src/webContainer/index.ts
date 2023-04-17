@@ -60,7 +60,7 @@ window.addEventListener('load', async () => {
 
   webcontainerInstance = await WebContainer.boot();
   const dispose = reaction(() => appStore.Setting.PersistableLoadProcess.value, async (v) => {
-    if (v >= 90) {
+    if (v == 100) {
       await webcontainerInstance.mount(appStore.TreeStore.OriginBootContainerFiles);
 
       // const packageJSON = await webcontainerInstance.fs.readFile('./react_tmpl/package.json', 'utf-8');
