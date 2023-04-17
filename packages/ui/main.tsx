@@ -6,6 +6,11 @@ import { appStore } from "@store/index";
 import { reaction } from "mobx";
 const root = createRoot(document.querySelector("#root") as HTMLElement);
 
+/** prod */
+if(import.meta.env.PROD) {
+  console.log = () => {};
+}
+
 const dispose = reaction(
   () => appStore.Setting.PersistableLoadProcess.value,
   (v) => {
