@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 function useKeydown(props) {
   useEffect(() => {
     const handleKeyDown = (event) => {
-      console.log(event.keyCode)
       if (event.metaKey && event.keyCode === 8) {
         props.CommandDelete?.(event);
         event.preventDefault(); // Prevent the default action (e.g. back navigation)
@@ -13,6 +12,10 @@ function useKeydown(props) {
       if (event.metaKey && event.keyCode === 83) {
         props.CommandSave?.(event);
         event.preventDefault(); 
+      }
+      if (event.ctrlKey && event.keyCode === 83) {
+        event.preventDefault(); 
+        props.CommandSave?.(event);
       }
     };
 

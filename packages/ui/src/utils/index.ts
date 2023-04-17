@@ -1,7 +1,9 @@
 export * from './fullScreen'
+import * as monaco from "monaco-editor";
 
 const languageMap = {
     'ts': 'typescript',
+    'js': 'javascript',
     'tsx': 'typescript'
 }
 
@@ -16,6 +18,7 @@ function webcontainerFiles_to_treeData(files){
             if(exact > -1) {
                 extname = path.slice(exact+1)
             }
+
             let newTree:any = {
                 key: path,
                 title: k,
@@ -29,6 +32,12 @@ function webcontainerFiles_to_treeData(files){
             }
             else {
                 newTree.content = target[k].file.contents
+                console.log( monaco.Uri.parse(path))
+                monaco.editor.createModel(
+                    newTree.content,
+                    newTree.extname,
+                    monaco.Uri.parse(path)
+                )
             }
         }
     }

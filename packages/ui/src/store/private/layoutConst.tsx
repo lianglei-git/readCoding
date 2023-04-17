@@ -51,10 +51,16 @@ const planLayoutMainInit = [
     { i: 'code', x: 2, y: 0, w: 2.4, h: 5.7, show: true }
 ]
 
+const CardCodeLayout = [
+    { i: 'code', x: 0, y: 0, w: 2.9, h: 5.5, show: true },
+    { i: 'view', x: 3, y: 0, w: 2.9, h: 5.5,  show: true }
+]
+
 
 export {
     planLayoutMain_Mutant,
     planLayoutMain_Horizontal,
     planLayoutMainInit,
-    ViewMap
+    ViewMap,
+    CardCodeLayout
 }

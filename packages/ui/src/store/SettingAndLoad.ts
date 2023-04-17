@@ -3,7 +3,7 @@ import { AppStore } from ".";
 import { Localforage_key_Books } from "./private";
 import { action, makeObservable, observable, toJS } from "mobx";
 import { makePersistable, isHydrated } from 'mobx-persist-store'; // 引入相关api
-import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu, planLayoutMainInit } from "./private/layoutConst";
+import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu, planLayoutMainInit, CardCodeLayout } from "./private/layoutConst";
 
 
 
@@ -55,6 +55,9 @@ class SettingAndLoadStore {
                 // 非ui代码实现
                 if(!AppStore.isCardCode) {
                     this.PersistableLoadProcess.value = 100;
+                }else {
+                    this.LayoutPlan = CardCodeLayout;
+                    this.changeLayout(LayoutEnmu.Static);
                 }
             })
           );

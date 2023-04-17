@@ -8,6 +8,7 @@ import "./index.less";
 import { SpButton } from "@/components/RewriteUI";
 import React, { useState, useRef } from "react";
 import * as monaco from "monaco-editor";
+import Spui from "@sparrowend/ui";
 
 function debounce (func: Function, time: number, immediate = false){
   let timer: number | null = null;
@@ -33,12 +34,18 @@ const AnyContainer = () => {
     reaction(
       () => app.Coding.CurPanelCode,
       (e) => {
+        // console.log(monaco.Uri.parse(app.Coding.curFileInfo.path),'monaco.Uri.parse(app.Coding.curFileInfo.path)')
         localUseInstance.current = instance;
-        const model = monaco.editor.createModel(
-          app.Coding.CurPanelCode,
-          app.Coding.CurExtname
-        );
-        instance.setModel(model);
+        // instance.setValue(app.Coding.CurPanelCode)
+        // monaco.editor.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
+        // instance.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
+        // instance.getModel()?.setValue()
+        // const model = monaco.editor.createModel(
+        //   app.Coding.CurPanelCode,
+        //   app.Coding.CurExtname,
+        //   monaco.Uri.parse(app.Coding.curFileInfo.path)
+        // );
+        instance.setModel(monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path)));
       }
     );
   };
@@ -64,6 +71,7 @@ const AnyContainer = () => {
     CommandSave(){
       if(localUseInstance.current) {
         writeContent(localUseInstance.current.getValue());
+        Spui.Message.success('success 🎉');
       }
     }
   });
@@ -111,6 +119,7 @@ const CodingContainer = () => {
       containerRef.current.getBoundingClientRect().x < 50
         ? "right"
         : "",
+        show? 'active': ''
     ].join(" ");
   };
   return (
@@ -122,7 +131,7 @@ const CodingContainer = () => {
           type={"link"}
           icon="sp-icon-folder"
         ></SpButton>
-    <span style={{marginLeft: 15}}> 目前仅支持<span style={{color: 'red',fontWeight:'bold'}}> command + s </span>保存代码!!</span>
+        <span style={{marginLeft: 15}}> 目前仅支持<span style={{color: 'red',fontWeight:'bold'}}> command + s </span>保存代码!!</span>
         </p>
       <div className={getCodingContainerClassName()} ref={containerRef}>
         <div className={["treeContainer", show ? "active" : ""].join(" ")}>

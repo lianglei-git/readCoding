@@ -22,7 +22,7 @@ type VoidOrUndefinedOnly = void | { [UNDEFINED_VOID_ONLY]: never };
 export = React;
 export as namespace React;
 
-declare namespace React {
+declare module 'react'  {
     //
     // React Elements
     // ----------------------------------------------------------------------

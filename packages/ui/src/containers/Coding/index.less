@@ -22,8 +22,10 @@
       
     }
     &.right {
-        z-index: 99;
         overflow: hidden;
+        &.active {
+        z-index: 9;
+    }
         .treeContainer {
             left: -50%;
             &.active {
