@@ -31,21 +31,32 @@ const FilesTree = () => {
   };
   return (
     <div>
-      <div className="constrol">
-        <SpButton
-          type={"link"}
-          size="mini"
-          onClick={() => app.TreeStore.addPositionData()}
-          icon="sp-icon-chakanwenjianmulu"
-        ></SpButton>
-        <SpButton
-          type={"link"}
-          size="mini"
-          onClick={() => app.TreeStore.addPositionData(true)}
-          icon="sp-icon-folder"
-        ></SpButton>
+      <div className="control_top">
+        <div className="baseline">Project</div>
+        <div className="control">
+          <SpButton
+            type={"link"}
+            size="mini"
+            onClick={() => app.TreeStore.addPositionData()}
+            icon="sp-icon-chakanwenjianmulu"
+          >
+            <div className="Placeholder sp-icon sp-icon-tianjia"></div>
+          </SpButton>
+          <SpButton
+            type={"link"}
+            size="mini"
+            onClick={() => app.TreeStore.addPositionData(true)}
+            icon="sp-icon-folder"
+          >
+            <div className="Placeholder sp-icon sp-icon-tianjia"></div>
+          </SpButton>
+        </div>
       </div>
-      <TreeFiles expandedKeys={app.TreeStore.expandedKeys} treeData={app.TreeStore.value} onSelect={onSelect} />
+      <TreeFiles
+        expandedKeys={app.TreeStore.expandedKeys}
+        treeData={app.TreeStore.value}
+        onSelect={onSelect}
+      />
     </div>
   );
 };

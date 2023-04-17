@@ -3,7 +3,8 @@ import Spui from "@sparrowend/ui";
 import localforage from "localforage";
 import { computed, makeAutoObservable, makeObservable, observable, reaction, toJS } from "mobx";
 import { Localforage_key_Any, Localforage_key_Books } from "./private";
-import pdfImg from '../../public/imgs/pdf-icon.png'
+// import pdfImg from '../../public/imgs/pdf-icon.png?worker&inline'
+const pdfImg =new URL('../../public/imgs/pdf-icon.png', import.meta.url).href
 
 const default_cover_Map = {
     'application/pdf' : pdfImg

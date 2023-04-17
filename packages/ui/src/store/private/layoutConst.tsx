@@ -5,7 +5,8 @@ import ViewRenderContainer from "@/containers/ViewRender"
 export enum LayoutEnmu {
     Horizontal,
     Mutant,
-    Static
+    Static,
+    Init
 }
 
 const ViewMap = {
@@ -44,8 +45,16 @@ const planLayoutMain_Horizontal: LayoutEnmu.Horizontal | any = [
 ]
 
 
+const planLayoutMainInit = [
+    { i: 'read', x: 0, y: 0, w: 1.5, h: 5.7, show: true },
+    { i: 'view', x: 4, y: 0, w: 2, h: 5.7,  show: true },
+    { i: 'code', x: 2, y: 0, w: 2.4, h: 5.7, show: true }
+]
+
+
 export {
     planLayoutMain_Mutant,
     planLayoutMain_Horizontal,
+    planLayoutMainInit,
     ViewMap
 }

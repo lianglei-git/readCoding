@@ -9,9 +9,9 @@ import "./index.less";
 import { observer } from "mobx-react-lite";
 import { ViewMap } from "@store/private/layoutConst";
 
-const Cmp = (Props:any) => {
-  return <Props.component />
-}
+const Cmp = (Props: any) => {
+  return <Props.component />;
+};
 
 // 1. https://boychina.github.io/posts/2020-09-27-react-grid-layout
 // 2. https://blog.csdn.net/wang19970228/article/details/123514152
@@ -39,18 +39,19 @@ const Layout = () => {
     item.show = false;
   };
 
-
-
   const content = layout.map((item: any, index: number) => {
     return (
       item.show && (
         <div key={item.i} className="wh100">
-          <i
-            className="sp-icon sp-icon-close"
-            onClick={(e) => onClose(item, index)}
-          ></i>
+          <p className="item_layout_top">
+            {" "}
+            <i
+              className="sp-icon sp-icon-close closePanel"
+              onClick={(e) => onClose(item, index)}
+            ></i>
+          </p>
           <div key={item.i}>
-            <Cmp component={ViewMap[item.i]}/>
+            <Cmp component={ViewMap[item.i]} />
             {/* {ViewMap[item.i]()} */}
             {item.children && (
               <ReactGridLayout
@@ -68,7 +69,7 @@ const Layout = () => {
                             className="sp-icon sp-icon-close"
                             onClick={(e) => onClose(i2, i2Index)}
                           ></i>{" "}
-                            <Cmp component={ViewMap[i2.i]}/>
+                          <Cmp component={ViewMap[i2.i]} />
                           {/* {ViewMap[i2.i]()} */}
                         </div>
                       </div>

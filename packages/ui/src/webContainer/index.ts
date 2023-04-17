@@ -37,6 +37,7 @@ export function webcontainerCreate(path, isDir) {
 
 export const terminal: any = new Terminal({
   convertEol: true,
+  cursorBlink: true,
 });
 
 /** @type {import('@webcontainer/api').WebContainer}  */
@@ -61,7 +62,7 @@ window.addEventListener('load', async () => {
   const dispose = reaction(() => appStore.Setting.PersistableLoadProcess.value, async (v) => {
     if (v >= 90) {
       await webcontainerInstance.mount(appStore.TreeStore.OriginBootContainerFiles);
-      installDependencies(terminal)
+
       // const packageJSON = await webcontainerInstance.fs.readFile('./react_tmpl/package.json', 'utf-8');
       // console.log(packageJSON);
       webcontainerInstance.on('server-ready', (port: any, url: any) => {
@@ -69,7 +70,12 @@ window.addEventListener('load', async () => {
         appStore.BootContainerInfo.isLoadedBootContainer = true;
         appStore.BootContainerInfo.src = url
       });
-      startShell(terminal);
+      if(location.search.indexOf('cardCode') > -1) {
+        let e = await installDependencies(terminal)
+        // await e;
+        await startShell(terminal);
+        e = await RunStart(terminal);
+      }
       dispose();
     }
   }, { fireImmediately: true });
@@ -99,10 +105,25 @@ async function installDependencies(terminal: Terminal) {
   const installProcess = await webcontainerInstance.spawn('pnpm', ['install']);
   installProcess.output.pipeTo(new WritableStream({
     write(data) {
-      // console.log(data);
       terminal.write(data);
     }
   }));
+  // terminal.ex
+  // Wait for install command to exit
+  return installProcess.exit;
+}
+
+
+
+async function RunStart(terminal: Terminal) {
+  // Install dependencies
+  const installProcess = await webcontainerInstance.spawn('pnpm', ['start']);
+  installProcess.output.pipeTo(new WritableStream({
+    write(data) {
+      terminal.write(data);
+    }
+  }));
+  // terminal.ex
   // Wait for install command to exit
   return installProcess.exit;
 }

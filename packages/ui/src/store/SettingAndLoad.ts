@@ -3,7 +3,7 @@ import { AppStore } from ".";
 import { Localforage_key_Books } from "./private";
 import { action, makeObservable, observable, toJS } from "mobx";
 import { makePersistable, isHydrated } from 'mobx-persist-store'; // 引入相关api
-import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu } from "./private/layoutConst";
+import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu, planLayoutMainInit } from "./private/layoutConst";
 
 
 
@@ -16,6 +16,12 @@ class SettingAndLoadStore {
 
     /** 修改布局 */
     changeLayout = (layoutType: LayoutEnmu) => {
+        if (layoutType == LayoutEnmu.Init) {
+            this.LayoutPlan = planLayoutMainInit;
+            return;
+        }
+
+        
         if(layoutType == LayoutEnmu.Static) {
             const cp = toJS(this.LayoutPlan);
             this.LayoutPlan = cp.map(i => {

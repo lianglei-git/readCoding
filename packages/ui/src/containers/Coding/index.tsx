@@ -28,10 +28,12 @@ function debounce (func: Function, time: number, immediate = false){
 
 const AnyContainer = () => {
   const app = useAppStore();
+  const localUseInstance:{current?: monaco.editor.IStandaloneCodeEditor} = useRef();
   const onMount = (instance: monaco.editor.IStandaloneCodeEditor) => {
     reaction(
       () => app.Coding.CurPanelCode,
       (e) => {
+        localUseInstance.current = instance;
         const model = monaco.editor.createModel(
           app.Coding.CurPanelCode,
           app.Coding.CurExtname
@@ -40,7 +42,7 @@ const AnyContainer = () => {
       }
     );
   };
-  const onChangeValue = debounce(function(value: string){
+  const writeContent = (value:string) => {
     if (!app.Coding.curFileInfo) return "";
     const pos: string[] = app.Coding.curFileInfo.pos.split("-");
     pos.shift();
@@ -57,7 +59,18 @@ const AnyContainer = () => {
     finData.content = value;
     app.TreeStore.reWriteValue(clone_data);
     writeFileContent(app.Coding.CurPath, value);
-  },3000);
+  }
+  useKeydown({
+    CommandSave(){
+      if(localUseInstance.current) {
+        writeContent(localUseInstance.current.getValue());
+      }
+    }
+  });
+
+  
+
+  const onChangeValue = () => {}// debounce(writeContent,3000);
   return (
     <div>
       {" "}
@@ -88,7 +101,7 @@ const CodingContainer = () => {
         },
         onCancel: () => modal.show(false),
       });
-    },
+    }
   });
   const getCodingContainerClassName = () => {
     return [
@@ -102,12 +115,15 @@ const CodingContainer = () => {
   };
   return (
     <>
-      <SpButton
-        classname="folderButton"
-        onClick={() => setShow(!show)}
-        type={"link"}
-        icon="sp-icon-folder"
-      ></SpButton>
+        <p className="code_attach"> 
+        <SpButton
+          classname="folderButton"
+          onClick={() => setShow(!show)}
+          type={"link"}
+          icon="sp-icon-folder"
+        ></SpButton>
+    <span style={{marginLeft: 15}}> 目前仅支持<span style={{color: 'red',fontWeight:'bold'}}> command + s </span>保存代码!!</span>
+        </p>
       <div className={getCodingContainerClassName()} ref={containerRef}>
         <div className={["treeContainer", show ? "active" : ""].join(" ")}>
           {" "}
