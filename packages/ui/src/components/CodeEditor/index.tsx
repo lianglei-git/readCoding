@@ -2,6 +2,10 @@ import React, { useEffect, useLayoutEffect, useRef } from "react";
 import * as monaco from "monaco-editor";
 import "./index.less";
 // https://zhuanlan.zhihu.com/p/47746336
+// https://juejin.cn/post/7085896602124025887#heading-5
+// https://stackoom.com/question/3XPCp
+// https://snyk.io/advisor/npm-package/monaco-editor/functions/monaco-editor.languages.typescript
+
 import TypeReact from './types/react.d.ts?raw'
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
