@@ -21,6 +21,7 @@ const ViewRenderContainer = () => {
 
   useLayoutEffect(() => {
     terminal.open(terminalRef.current);
+    terminal.write('waiting...\n')
   }, []);
   return (
     <div className="ViewRenderContainer">

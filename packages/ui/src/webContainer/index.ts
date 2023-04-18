@@ -75,6 +75,8 @@ window.addEventListener('load', async () => {
         // await e;
         await startShell(terminal);
         e = await RunStart(terminal);
+      }else {
+        await startShell(terminal);
       }
       dispose();
     }

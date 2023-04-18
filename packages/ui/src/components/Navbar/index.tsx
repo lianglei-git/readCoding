@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { createElement, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import ToolLayout from "../tools/layout";
 import "./index.less";
@@ -83,7 +83,13 @@ const Navbar = () => {
 
     moveScript.innerHTML = innerHtmlStr;
     body.appendChild(moveScript);
-    doc.getElementsByTagName("head")[0].innerHTML = head.innerHTML;
+    const openBodyHead = doc.getElementsByTagName("head")[0]
+    openBodyHead.innerHTML = head.innerHTML;
+    Array.from(head.getElementsByTagName('link')).map(element => {
+      let linkEl = document.createElement('link');
+      linkEl.href = element.href;
+      openBodyHead.append(linkEl);
+    });
   };
   return (
     <>
