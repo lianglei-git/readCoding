@@ -6,11 +6,11 @@ import React, { memo } from "react";
 
 
 // TODO: 需要进行iframe优化
-const ReadStream = () => {
+const ReadStream = (props:any) => {
     const books = useBooks();
     const baseURL = location.origin + location.pathname;
     if(!books.activeBook) return <span>请选择图书📖</span>
-    return <div style={{width: '100%', height: 'calc(100% - 50px)'}}>
+    return <div style={{width: '100%', height: 'calc(100% - 50px)', ...props.style}}>
          <iframe src={baseURL+"/public/pdfjs/web/viewer.html?file="+books.activeBook.key}>加载中...</iframe>
         </div>
 }

@@ -51,7 +51,11 @@ const ReadBookContainer = () => {
       {active == "bookShelf" && (
         <BookShelf BookShelfDoubleClick={BookShelfDoubleClick} />
       )}
-      {active == "readFile" && <ReadStream />}
+      {/* {active == "readFile" && ( */}
+        <ReadStream
+          style={{ display: active == "readFile" ? "block" : "none" }}
+        />
+      {/* )}  */}
       {active == "upload" && <UploadFile />}
     </div>
   );

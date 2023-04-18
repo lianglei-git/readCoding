@@ -88,6 +88,9 @@ const Navbar = () => {
     Array.from(head.getElementsByTagName('link')).map(element => {
       let linkEl = document.createElement('link');
       linkEl.href = element.href;
+      linkEl.rel = element.rel;
+      linkEl.as = element.as;
+      // linkEl.crossorigin = element.crossorigin;
       openBodyHead.append(linkEl);
     });
   };
