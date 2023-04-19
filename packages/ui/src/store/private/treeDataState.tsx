@@ -6,7 +6,7 @@ import React from "react";
 
 import templateJSON from "../../../template.json";
 
-console.log(templateJSON, "templateJSON");
+// console.log(templateJSON, "templateJSON");
 // console.log(process.env,'import.meta.envimport.meta.env')
 
 /** 内部为data 外部为value */

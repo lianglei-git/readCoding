@@ -22,7 +22,7 @@ const ReadBookContainer = () => {
     setActive(type);
   };
   const BookShelfDoubleClick = () => {
-    console.log(books.activeBook);
+    // console.log(books.activeBook);
     setActive("readFile");
   };
 

@@ -33,7 +33,7 @@ function webcontainerFiles_to_treeData(files){
             }
             else {
                 newTree.content = target[k].file.contents
-                console.log( monaco.Uri.parse(path))
+                // console.log( monaco.Uri.parse(path))
                 monaco.editor.createModel(
                     newTree.content,
                     newTree.extname,

@@ -56,7 +56,7 @@ class SpuiTesting {
         if (uiForCardCode) {
             uiForCardCode = JSON.parse(uiForCardCode);
         }
-        this.app.TreeStore.startup(uiForCardCode ?? default_react_template);
+        this.app.TreeStore.startup(uiForCardCode || default_react_template);
         this.app.Setting.PersistableLoadProcess.value = 100;
         setTimeout(() => {
             Array.from(document.querySelectorAll('.rc-tree-node-content-wrapper')).forEach((element: any) => {

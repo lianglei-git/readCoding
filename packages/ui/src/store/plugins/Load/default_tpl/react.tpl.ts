@@ -34,7 +34,7 @@ ReactDOM.render(<Buttons />, mountNode);
 
 const default_react_template =
 {
-    "demo.tsx": {
+    "demo.jsx": {
         "file": {
             "contents": ReactDemo
         }
@@ -67,18 +67,17 @@ const default_react_template =
     "index.tsx": {
         "file": {
             "contents": `
-            import React from 'react';
-            import ReactDOM from 'react-dom';
-            window.React = React;
-            window.ReactDOM = ReactDOM;
-            import '@sparrowend/ui/dist/spui.js'
-            import '@sparrowend/ui/dist/spui.css'
-            import './index.css';
-            window.onload = () => {
-                window.mountNode = document.getElementById('container');
-                import('./demo');
-            
-            }
+import React from 'react';
+import ReactDOM from 'react-dom';
+window.React = React;
+window.ReactDOM = ReactDOM;
+import '@sparrowend/ui/dist/spui.js'
+import '@sparrowend/ui/dist/spui.css'
+import './index.css';
+window.onload = () => {
+    window.mountNode = document.getElementById('container');
+    import('./demo');
+}
             `
         }
     },
