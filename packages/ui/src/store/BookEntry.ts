@@ -13,7 +13,7 @@ const default_cover_Map = {
 const ErrorTip = (Spui.Message as any).error
 const SuccessTip = (Spui.Message as any).success
 
-enum FileType {
+export enum FileType {
     markdown = 'text/markdown',
     pdf = 'application/pdf',
 }
@@ -298,5 +298,10 @@ class BookEntry {
     }
 
 }
-
+export {
+    BookAction,
+    BookItem,
+    BookSaveType
+    
+}
 export default BookEntry;

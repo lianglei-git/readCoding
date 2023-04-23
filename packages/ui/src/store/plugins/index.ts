@@ -7,6 +7,7 @@ class Plugins {
         this.LoadPluginsMap.then((module: any) => {
             enabled.map(key=> {
                 if(key !== null && module.default[key]){
+                    console.log(key,'keykeykey')
                     // console.log(module.default[key],'module.default[key]')
                     new (module.default[key])(app);
                 }

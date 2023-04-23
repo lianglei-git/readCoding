@@ -56,11 +56,16 @@ const CardCodeLayout = [
     { i: 'view', x: 3, y: 0, w: 2.9, h: 5.5,  show: true }
 ]
 
+const OnlyReadLayut = [
+    { i: 'read', x: 0, y: 0, w: 6, h: 6, show: true, static: true, noShowTopTools: true },
+]
+
 
 export {
     planLayoutMain_Mutant,
     planLayoutMain_Horizontal,
     planLayoutMainInit,
     ViewMap,
-    CardCodeLayout
+    CardCodeLayout,
+    OnlyReadLayut
 }

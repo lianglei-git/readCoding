@@ -21,11 +21,13 @@ class AppStore {
     }
 
     static isCardCode = window.location.search.indexOf('cardCode') > -1;
+    static isOnlyRead = window.location.search.indexOf('onlyRead') > -1;
 
     static createPluginsParams() {
         return [
             /** card coding */
-            AppStore.isCardCode ? LoadingENUM['SpuiTesting'] : null
+            AppStore.isCardCode ? LoadingENUM['SpuiTesting'] : null,
+            LoadingENUM['LoadDefaultBook']
         ]
     }
 

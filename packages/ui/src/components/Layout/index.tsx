@@ -43,13 +43,13 @@ const Layout = () => {
     return (
       item.show && (
         <div key={item.i} className="wh100">
-          <p className="item_layout_top">
+          {!item.noShowTopTools && <p className="item_layout_top">
             {" "}
             <i
               className="sp-icon sp-icon-close closePanel"
               onClick={(e) => onClose(item, index)}
             ></i>
-          </p>
+          </p>}
           <div key={item.i}>
             <Cmp component={ViewMap[item.i]} />
             {/* {ViewMap[item.i]()} */}

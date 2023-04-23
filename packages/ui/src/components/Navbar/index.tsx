@@ -66,9 +66,9 @@ const Navbar = () => {
     const head = document.getElementsByTagName("head")[0];
     // 渲染react 组件
     ReactDOM.render(<ReadBookContainer />, rootDom);
-    window.addEventListener("unload", function () {
-      target.close();
-    });
+    // window.addEventListener("unload", function () {
+    //   target.close();
+    // });
     const moveScript = document.createElement("script");
     // 将窗口移动到指定位置
     const innerHtmlStr =

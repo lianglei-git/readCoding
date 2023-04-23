@@ -3,7 +3,7 @@ import { AppStore } from ".";
 import { Localforage_key_Books } from "./private";
 import { action, makeObservable, observable, toJS } from "mobx";
 import { makePersistable, isHydrated } from 'mobx-persist-store'; // 引入相关api
-import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu, planLayoutMainInit, CardCodeLayout } from "./private/layoutConst";
+import { planLayoutMain_Horizontal, planLayoutMain_Mutant, LayoutEnmu, planLayoutMainInit, CardCodeLayout, OnlyReadLayut } from "./private/layoutConst";
 
 
 
@@ -21,16 +21,16 @@ class SettingAndLoadStore {
             return;
         }
 
-        
-        if(layoutType == LayoutEnmu.Static) {
+
+        if (layoutType == LayoutEnmu.Static) {
             const cp = toJS(this.LayoutPlan);
             this.LayoutPlan = cp.map(i => {
                 i.static = !i.static;
                 return i;
             })
-        }else if(layoutType == LayoutEnmu.Mutant) {
+        } else if (layoutType == LayoutEnmu.Mutant) {
             this.LayoutPlan = planLayoutMain_Mutant;
-        }else{
+        } else {
             this.LayoutPlan = planLayoutMain_Horizontal;
         }
     }
@@ -50,17 +50,22 @@ class SettingAndLoadStore {
             name: 'PersistSetting',
             properties: ['LayoutPlan'],
             storage: localStorage
-          }).then(
+        }).then(
             action(() => {
                 // 非ui代码实现
-                if(!AppStore.isCardCode) {
+                if (AppStore.isOnlyRead) {
+                    this.LayoutPlan = OnlyReadLayut;
                     this.PersistableLoadProcess.value = 100;
-                }else {
+                    return
+                }
+                if (AppStore.isCardCode) {
                     this.LayoutPlan = CardCodeLayout;
                     this.changeLayout(LayoutEnmu.Static);
+                    return
                 }
+                this.PersistableLoadProcess.value = 100;
             })
-          );
+        );
         // if(useType)
         localforage.getItem(Localforage_key_Books, (err, historyBooks) => {
             if (err) {
