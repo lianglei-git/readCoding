@@ -136,6 +136,19 @@ importers:
       vite-plugin-monaco-editor: 1.1.0_monaco-editor@0.36.1
       vite-plugin-static-copy: 0.13.1_vite@4.1.4
 
+  packages/ui/template/spuiDev:
+    specifiers:
+      '@sparrowend/ui-core': latest
+      '@vitejs/plugin-react': ^3.1.0
+      typescript: ^4.9.3
+      vite: ^4.2.0
+    dependencies:
+      '@sparrowend/ui-core': 1.0.0
+    devDependencies:
+      '@vitejs/plugin-react': 3.1.0_vite@4.2.1
+      typescript: 4.9.5
+      vite: 4.2.1
+
   packages/ui/template/spuiTesting/react:
     specifiers:
       '@sparrowend/ui': latest
@@ -1184,6 +1197,12 @@ packages:
       unicode-trie: 0.3.1
     dev: false
 
+  /@sparrowend/ui-core/1.0.0:
+    resolution: {integrity: sha512-iO6T/aCY8ffPtz72PtqPGOUor96OP8/FeuUdM7gJ1CaDRp20KQGKGaC9tESWPpwml3l8XMCm0t5E2GecJ+VmPQ==}
+    dependencies:
+      object-assign: 4.1.1
+    dev: false
+
   /@sparrowend/ui/1.2.0:
     resolution: {integrity: sha512-0P0JJeTmD7snak+y8aeppLa5TPoSHSnhTyN2fbavVcir3xvXg+uMJAjUXLgH1iRgenh3W1sY114BeG43thNSMg==}
     dev: false
@@ -1668,7 +1687,7 @@ packages:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
 
   /cookie-signature/1.0.6:
-    resolution: {integrity: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=}
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
     dev: false
 
   /cookie/0.5.0:
@@ -3388,7 +3407,7 @@ packages:
     dev: false
 
   /utils-merge/1.0.1:
-    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
+    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
     dev: false
 
