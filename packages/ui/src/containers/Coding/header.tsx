@@ -21,7 +21,7 @@ window.onRemember = () => {
             window.closeeRmember()
         }
         setTimeout(() => {
-            Spui.Message.info('分享链接地址: ' +location.origin+'?spuiDev&key='+key, {duration: 8000})
+            Spui.Message.info('分享链接地址: ' +location.origin+location.pathname+'?spuiDev&key='+key, {duration: 8000})
         },130)
     })
 }
