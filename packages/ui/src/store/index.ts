@@ -21,9 +21,14 @@ class AppStore {
     }
 
     static isCardCode = window.location.search.indexOf('cardCode') > -1;
+    static isSparrowUiDev = window.location.search.indexOf('spuiDev') > -1;
     static isOnlyRead = window.location.search.indexOf('onlyRead') > -1;
 
     static createPluginsParams() {
+        /** ui开发 */
+        if(AppStore.isSparrowUiDev) {
+            return [LoadingENUM['SpuiDev']]
+        }
         return [
             /** card coding */
             AppStore.isCardCode ? LoadingENUM['SpuiTesting'] : null,

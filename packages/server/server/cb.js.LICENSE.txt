@@ -6,6 +6,13 @@
  */
 
 /*!
+ * bytes
+ * Copyright(c) 2012-2014 TJ Holowaychuk
+ * Copyright(c) 2015 Jed Watson
+ * MIT Licensed
+ */
+
+/*!
  * content-disposition
  * Copyright(c) 2014-2017 Douglas Christopher Wilson
  * MIT Licensed
@@ -21,6 +28,12 @@
  * cookies
  * Copyright(c) 2014 Jed Schmidt, http://jed.is/
  * Copyright(c) 2015-2016 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
+ * copy-to - index.js
+ * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
  * MIT Licensed
  */
 
@@ -108,6 +121,13 @@
  */
 
 /*!
+ * methods
+ * Copyright(c) 2013-2014 TJ Holowaychuk
+ * Copyright(c) 2015-2016 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
  * Copyright(c) 2015-2022 Douglas Christopher Wilson
@@ -144,6 +164,13 @@
  */
 
 /*!
+ * raw-body
+ * Copyright(c) 2013-2014 Jonathan Ong
+ * Copyright(c) 2014-2022 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
  * resolve-path
  * Copyright(c) 2014 Jonathan Ong
  * Copyright(c) 2015-2018 Douglas Christopher Wilson
@@ -167,6 +194,12 @@
  * type-is
  * Copyright(c) 2014 Jonathan Ong
  * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
+ * unpipe
+ * Copyright(c) 2015 Douglas Christopher Wilson
  * MIT Licensed
  */
 

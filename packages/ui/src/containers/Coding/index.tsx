@@ -9,27 +9,12 @@ import { SpButton } from "@/components/RewriteUI";
 import React, { useState, useRef, useEffect } from "react";
 import * as monaco from "monaco-editor";
 import Spui from "@sparrowend/ui";
-
-function debounce (func: Function, time: number, immediate = false){
-  let timer: number | null = null;
-  return (...args: any) => {
-      if (timer) clearInterval(timer)
-      if (immediate) {
-          if (!timer) func.apply(this, args);
-          timer = window.setTimeout(() => {
-              timer = null
-          }, time)
-      } else {
-          timer = window.setTimeout(() => {
-              func.apply(this, args)
-          }, time)
-      }
-  }
-}
+import CodeAttach from "./header";
 
 const AnyContainer = () => {
   const app = useAppStore();
-  const localUseInstance:{current?: monaco.editor.IStandaloneCodeEditor} = useRef();
+  const localUseInstance: { current?: monaco.editor.IStandaloneCodeEditor } =
+    useRef();
   const onMount = (instance: monaco.editor.IStandaloneCodeEditor) => {
     reaction(
       () => app.Coding.CurPanelCode,
@@ -45,11 +30,13 @@ const AnyContainer = () => {
         //   app.Coding.CurExtname,
         //   monaco.Uri.parse(app.Coding.curFileInfo.path)
         // );
-        instance.setModel(monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path)));
+        instance.setModel(
+          monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path))
+        );
       }
     );
   };
-  const writeContent = (value:string) => {
+  const writeContent = (value: string) => {
     if (!app.Coding.curFileInfo) return "";
     const pos: string[] = app.Coding.curFileInfo.pos.split("-");
     pos.shift();
@@ -66,19 +53,17 @@ const AnyContainer = () => {
     finData.content = value;
     app.TreeStore.reWriteValue(clone_data);
     writeFileContent(app.Coding.CurPath, value);
-  }
+  };
   useKeydown({
-    CommandSave(){
-      if(localUseInstance.current) {
+    CommandSave() {
+      if (localUseInstance.current) {
         writeContent(localUseInstance.current.getValue());
-        Spui.Message.success('success 🎉');
+        Spui.Message.success("success 🎉");
       }
-    }
+    },
   });
 
-  
-
-  const onChangeValue = () => {}// debounce(writeContent,3000);
+  const onChangeValue = () => {}; // debounce(writeContent,3000);
   return (
     <div>
       {" "}
@@ -94,12 +79,13 @@ const AnyContainer = () => {
 
 /** write code */
 const CodingContainer = () => {
-  const [show, setShow] = useState(false);
   const containerRef = useRef(null);
+  const [visibleMark, setVisibleMark] = useState(false);
+  const drawerRef = useRef();
   const app = useAppStore();
   useKeydown({
     CommandDelete() {
-      // setVisible(true);
+      // setVisibleMark(true);
       const modal = Spui.Modal.config({
         visible: true,
         bodyhtml: "是否删除",
@@ -109,49 +95,31 @@ const CodingContainer = () => {
         },
         onCancel: () => modal.show(false),
       });
-    }
+    },
   });
 
-  const isClassRight = () =>  containerRef.current &&
-  containerRef.current.getBoundingClientRect().x < 50
-  const getCodingContainerClassName = () => {
-    return [
-      "CodingContainer",
-    //   show &&
-      containerRef.current &&
-      containerRef.current.getBoundingClientRect().x < 50
-        ? "right"
-        : "",
-        show? 'active': ''
-    ].join(" ");
-  };
-  const [visible, setVisible] = useState(false)
-  const cur = useRef()
-   useEffect(() => {
-      cur.current.onClose = () => setVisible(false)
-  }, [])
+  const isClassRight = () =>
+    containerRef.current && containerRef.current.getBoundingClientRect().x < 50;
+
+  useEffect(() => {
+    drawerRef.current.onClose = () => setVisibleMark(false);
+  }, []);
   return (
     <>
-        <p className="code_attach"> 
-        <SpButton
-          classname="folderButton"
-          onClick={() => setVisible(!visible)}
-          type={"link"}
-          icon="sp-icon-folder"
-        ></SpButton>
-        <span style={{marginLeft: 15}}> 目前仅支持<span style={{color: 'red',fontWeight:'bold'}}> command + s </span>保存代码!!</span>
-        </p>
-        <sp-drawer placement={isClassRight()? 'right': 'left'} visible={visible} title='Basic Drawer' fullscreen='false' ref={cur}>
-            <div slot='content'> 
-            <FilesTree />
-            </div>
-        </sp-drawer>
-      {/* <div className={getCodingContainerClassName()} ref={containerRef}>
-        <div className={["treeContainer", show ? "active" : ""].join(" ")}>
-          {" "}
+      <CodeAttach visibleMark={() => {
+        setVisibleMark(!visibleMark)
+      }} />
+      <sp-drawer
+        placement={isClassRight() ? "right" : "left"}
+        visible={visibleMark}
+        title="Basic Drawer"
+        fullscreen="false"
+        ref={drawerRef}
+      >
+        <div slot="content">
           <FilesTree />
         </div>
-      </div> */}
+      </sp-drawer>
       <AnyContainer />
     </>
   );

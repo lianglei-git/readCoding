@@ -2,6 +2,7 @@ import Koa from "koa";
 import serve from "koa-static";
 import https from "https";
 import http from "http";
+import Cors from 'koa2-cors'
 import bodyParser from 'koa-bodyparser'
 import path from "path";
 import { readFileSync } from "node:fs";
@@ -23,6 +24,7 @@ import router from './routes.js'
 
 const app = new Koa();
 app.use(bodyParser())
+app.use(Cors())
 app.use(router.routes())
 
 // Serve static files from the "public" directory
@@ -46,3 +48,4 @@ app.use(
 http.createServer(app.callback()).listen(28256, () => {
   console.log("Server is listening on port 28256");
 });
+

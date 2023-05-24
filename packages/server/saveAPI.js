@@ -124,7 +124,9 @@ const getDataForKey = (key) => {
 /** 设置 */
 const setDataForKey = (key, data) => {
   let info = getUsefileInfo();
-  info.keys.push(key)
+  if(!info.keys.includes(key)) {
+    info.keys.push(key)
+  }
   if (fs.existsSync(info.path) && fs.statSync(info.path).size > maxFileCount) {
     MapKeyData = createMapKeyDataItem(MapKeyData);
     info = getUsefileInfo();

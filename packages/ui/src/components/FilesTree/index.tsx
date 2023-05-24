@@ -32,7 +32,7 @@ const FilesTree = () => {
   return (
     <div>
       <div className="control_top">
-        <div className="baseline">Project</div>
+        <div className="baseline">{app.TreeStore.projectName}</div>
         <div className="control">
           <SpButton
             type={"link"}

@@ -21,6 +21,7 @@ class TreeDataStore {
   }
   _data = null;
   OriginBootContainerFiles = null;
+  projectName = '';
 
   startup(originBootContainerFiles: any) {
     this.OriginBootContainerFiles = originBootContainerFiles;

@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+window.React = React;
+window.ReactDOM = ReactDOM;
 import '@sparrowend/ui-core/components/button-v2'
 import '@sparrowend/ui-core/components/button-v2/style'
 

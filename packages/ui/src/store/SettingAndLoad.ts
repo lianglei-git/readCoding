@@ -63,6 +63,11 @@ class SettingAndLoadStore {
                     this.changeLayout(LayoutEnmu.Static);
                     return
                 }
+                if (AppStore.isSparrowUiDev) {
+                    this.LayoutPlan = CardCodeLayout;
+                    this.changeLayout(LayoutEnmu.Static);
+                    return
+                }
                 this.PersistableLoadProcess.value = 100;
             })
         );
