@@ -1,0 +1,10 @@
+{
+  "sd-1": {
+    "path": "saveDataDir/sd-1.json",
+    "count": 1,
+    "keys": [
+      "k1",
+      "asd"
+    ]
+  }
+}
