@@ -10,17 +10,17 @@ import router from './routes.js'
 
 
 
-// const sslOptions = {
-//   key: readFileSync(
-//     path.resolve(__dirname, "../www.sparrowui.cn_nginx/www.sparrowui.cn.key")
-//   ),
-//   cert: readFileSync(
-//     path.resolve(
-//       __dirname,
-//       "../www.sparrowui.cn_nginx/www.sparrowui.cn_bundle.crt"
-//     )
-//   ),
-// };
+const sslOptions = {
+  key: readFileSync(
+    path.resolve(__dirname, "../www.sparrowui.cn_nginx/www.sparrowui.cn.key")
+  ),
+  cert: readFileSync(
+    path.resolve(
+      __dirname,
+      "../www.sparrowui.cn_nginx/www.sparrowui.cn_bundle.crt"
+    )
+  ),
+};
 
 const app = new Koa();
 app.use(bodyParser())
@@ -41,11 +41,11 @@ app.use(
   })
 );
 
-// https.createServer(sslOptions, app.callback()).listen(28256, () => {
-//   console.log("Server is listening on port 28256");
-// });
-
-http.createServer(app.callback()).listen(28256, () => {
+https.createServer(sslOptions, app.callback()).listen(28256, () => {
   console.log("Server is listening on port 28256");
 });
+
+// http.createServer(app.callback()).listen(28256, () => {
+//   console.log("Server is listening on port 28256");
+// });
 
