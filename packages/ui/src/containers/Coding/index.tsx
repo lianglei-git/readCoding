@@ -21,18 +21,25 @@ const AnyContainer = () => {
       (e) => {
         // console.log(monaco.Uri.parse(app.Coding.curFileInfo.path),'monaco.Uri.parse(app.Coding.curFileInfo.path)')
         localUseInstance.current = instance;
+        let model = monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path));
+        if(model) {
+          instance.setModel(
+            monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path))
+          );
+          return
+        }
         // instance.setValue(app.Coding.CurPanelCode)
         // monaco.editor.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
         // instance.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
         // instance.getModel()?.setValue()
-        // const model = monaco.editor.createModel(
-        //   app.Coding.CurPanelCode,
-        //   app.Coding.CurExtname,
-        //   monaco.Uri.parse(app.Coding.curFileInfo.path)
-        // );
-        instance.setModel(
-          monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path))
+         model = monaco.editor.createModel(
+          app.Coding.CurPanelCode,
+          app.Coding.CurExtname,
+          monaco.Uri.parse(app.Coding.curFileInfo.path)
         );
+        instance.setModel(model)
+
+       
       }
     );
   };

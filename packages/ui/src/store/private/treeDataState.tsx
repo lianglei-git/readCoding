@@ -142,10 +142,11 @@ class TreeDataStore {
     pos.push(findData.findLevelData.length);
     const onFull = (value: string) => {
       findData.findLevelData.pop();
+      
       const pd = {
         title: value,
         path: findData.path + "/" + value,
-        extname: ".js",
+        extname: value.slice(value.lastIndexOf('.') + 1),
         key: value,
       };
       if (isDir) {
