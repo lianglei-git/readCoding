@@ -85,6 +85,7 @@ const CodeEditor = (props: ICodeEditorType) => {
       codeContainer.current as unknown as HTMLElement,
       {
         value: props.value,
+        // theme: 'vs-dark',
         language: "javascript",
         minimap: {
           // 关闭小地图

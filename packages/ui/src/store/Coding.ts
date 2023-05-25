@@ -21,6 +21,9 @@ class CodingStore {
         if(this.curFileInfo?.extname.includes('js')) {
             return 'javascript'
         }
+        if(this.curFileInfo?.extname.includes('ts')) {
+            return 'typescript'
+        }
         // console.log(this.curFileInfo?.extname,'this.curFileInfo?.extname')
         return this.curFileInfo?.extname
     }

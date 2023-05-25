@@ -17,21 +17,20 @@ const AnyContainer = () => {
     useRef();
   const onMount = (instance: monaco.editor.IStandaloneCodeEditor) => {
     reaction(
-      () => app.Coding.CurPanelCode,
+      () => [app.Coding.CurPanelCode, app.Coding.curFileInfo.path],
       (e) => {
+        console.log(app.Coding.curFileInfo.path, 'app.Coding.curFileInfo.pathapp.Coding.curFileInfo.path')
         // console.log(monaco.Uri.parse(app.Coding.curFileInfo.path),'monaco.Uri.parse(app.Coding.curFileInfo.path)')
         localUseInstance.current = instance;
         let model = monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path));
         if(model) {
-          instance.setModel(
-            monaco.editor.getModel(monaco.Uri.parse(app.Coding.curFileInfo.path))
-          );
-          return
+          return instance.setModel(model);
         }
         // instance.setValue(app.Coding.CurPanelCode)
         // monaco.editor.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
         // instance.setModelLanguage(instance.getModel(), app.Coding.CurExtname)
         // instance.getModel()?.setValue()
+        
          model = monaco.editor.createModel(
           app.Coding.CurPanelCode,
           app.Coding.CurExtname,
