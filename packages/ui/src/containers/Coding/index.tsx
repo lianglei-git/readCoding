@@ -17,7 +17,7 @@ const AnyContainer = () => {
     useRef();
   const onMount = (instance: monaco.editor.IStandaloneCodeEditor) => {
     reaction(
-      () => [app.Coding.CurPanelCode, app.Coding.curFileInfo.path],
+      () => [app.Coding.CurPanelCode, app.Coding?.curFileInfo?.path],
       (e) => {
         console.log(app.Coding.curFileInfo.path, 'app.Coding.curFileInfo.pathapp.Coding.curFileInfo.path')
         // console.log(monaco.Uri.parse(app.Coding.curFileInfo.path),'monaco.Uri.parse(app.Coding.curFileInfo.path)')
