@@ -1,4 +1,4 @@
-import { HostComponent, HostText, SuspenseComponent, updateContainer } from "./updateContainer.js";
+import { HostComponent, HostText, SuspenseComponent, updateContainer } from "./updateContainer";
 
 const RESERVED_PROPS = {
   key: true,

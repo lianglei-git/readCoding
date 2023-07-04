@@ -3,12 +3,12 @@ import {
     HostRoot,
     NoFlags,
     createFiber
-} from "./element.js";
+} from "./element";
 import {
     createCursor,
     pop,
     push
-} from './filberStack.js'
+} from './filberStack'
 const NoLane = /*                          */ 0b0000000000000000000000000000000;
 const SyncLane = /*                        */ 0b0000000000000000000000000000001;
 const NoMode = /*                         */ 0b000000;

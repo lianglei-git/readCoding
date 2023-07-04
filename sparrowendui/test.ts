@@ -1,4 +1,4 @@
-import JsxRender, {createElement} from "./element.js";
+import JsxRender, {createElement} from "./element";
 
 const Element = () => /*#__PURE__*/ createElement("div", null, "9999");
 const p = /*#__PURE__*/ createElement("div", null, /*#__PURE__*/ createElement("p", null, "100101"), /*#__PURE__*/ createElement("a", {
