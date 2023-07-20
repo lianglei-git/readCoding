@@ -16,8 +16,8 @@ const Map: { [k: ActiveType | string]: any } = {
 };
 /** read book view */
 const ReadBookContainer = () => {
-  const books = useBooks();
   const [active, setActive] = useState("bookShelf" as ActiveType);
+  const [showTab, setShowTab] = useState(true);
   const onClick = (type: ActiveType) => {
     setActive(type);
   };
@@ -28,33 +28,47 @@ const ReadBookContainer = () => {
 
   return (
     <div className="ReadBookContainer">
-      <div className="ReadBookContainer__tab">
-        <SpButton
-          type={active == "bookShelf" ? "primary" : "default"}
-          onClick={() => onClick("bookShelf")}
+      <sp-affix offset-top="10">
+        <sp-button2
+          className="fixedShow"
+          size="small"
+          type="text"
+          shape="circle"
+          onClick={() => setShowTab(!showTab)}
         >
-          书架
-        </SpButton>
-        <SpButton
-          type={active == "readFile" ? "primary" : "default"}
-          onClick={() => onClick("readFile")}
-        >
-          读书
-        </SpButton>
-        <SpButton
-          type={active == "upload" ? "primary" : "default"}
-          onClick={() => onClick("upload")}
-        >
-          上传
-        </SpButton>
-      </div>
+          {!showTab ? "🖐️" : "👊"}
+        </sp-button2>
+      </sp-affix>
+
+      {showTab && (
+        <div className="ReadBookContainer__tab">
+          <SpButton
+            type={active == "bookShelf" ? "primary" : "default"}
+            onClick={() => onClick("bookShelf")}
+          >
+            书架
+          </SpButton>
+          <SpButton
+            type={active == "readFile" ? "primary" : "default"}
+            onClick={() => onClick("readFile")}
+          >
+            读书
+          </SpButton>
+          <SpButton
+            type={active == "upload" ? "primary" : "default"}
+            onClick={() => onClick("upload")}
+          >
+            上传
+          </SpButton>
+        </div>
+      )}
       {active == "bookShelf" && (
         <BookShelf BookShelfDoubleClick={BookShelfDoubleClick} />
       )}
       {/* {active == "readFile" && ( */}
-        <ReadStream
-          style={{ display: active == "readFile" ? "block" : "none" }}
-        />
+      <ReadStream
+        style={{ display: active == "readFile" ? "block" : "none" }}
+      />
       {/* )}  */}
       {active == "upload" && <UploadFile />}
     </div>

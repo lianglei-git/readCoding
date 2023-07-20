@@ -47,7 +47,7 @@ class SettingAndLoadStore {
             LayoutPlan: observable
         });
         makePersistable(this, {
-            name: 'PersistSetting',
+            name: 'CodingPersistSetting',
             properties: ['LayoutPlan'],
             storage: localStorage
         }).then(
